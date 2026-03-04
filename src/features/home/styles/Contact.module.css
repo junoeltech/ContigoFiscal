@@ -1,0 +1,9 @@
+.contact{padding:40px 16px}
+.container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:20px}
+.formCard{background:#fff;padding:20px;border-radius:10px}
+.form{display:grid;gap:8px}
+.input{padding:10px;border:1px solid #e5e7eb;border-radius:8px}
+.textarea{padding:10px;border:1px solid #e5e7eb;border-radius:8px}
+.submit{background:var(--brand-primary);color:#fff;padding:10px;border-radius:8px;border:none;cursor:pointer}
+.aside{background:#fff;padding:16px;border-radius:8px}
+.whatsapp{display:inline-block;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--brand-accent);color:#fff;text-decoration:none}

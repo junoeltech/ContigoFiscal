@@ -1,0 +1,7 @@
+:root{
+  --brand-primary:#0f4c81; /* reemplaza por color del logo */
+  --brand-accent:#f59e0b;  /* reemplaza por color del logo */
+  --brand-muted:#eef2ff;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%;margin:0;font-family:Inter, sans-serif;background:#f8fafc;color:#111827}
