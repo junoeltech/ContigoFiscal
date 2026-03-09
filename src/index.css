@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+:root {
+    --brand-primary: #004a87;
+    /* El azul corporativo */
+    --brand-accent: #fb923c;
+    /* El naranja del SAT */
+    --brand-muted: #f3f8ff;
+    /* Un azul muy clarito para fondos */
+}
+
+/* También añade esto para que no haya márgenes raros */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    /* O la que estés usando */
+    -webkit-font-smoothing: antialiased;
+}
