@@ -3,7 +3,8 @@
 :root {
     --brand-primary: #004a87;
     /* El azul corporativo */
-    --brand-accent: #fb923c;
+    --brand-accent: #C59B45;
+    /* --brand-accent: #fb923c; */
     /* El naranja del SAT */
     --brand-muted: #f3f8ff;
     /* Un azul muy clarito para fondos */
