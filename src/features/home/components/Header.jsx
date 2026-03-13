@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/header.module.css";
+import LogoImg from "../../../assets/contigofiscal_logo.png";
 
 export default function Header() {
   return (
@@ -8,11 +9,13 @@ export default function Header() {
         {/* Logotipo y Título */}
         <div className={styles.logoWrapper}>
           <div className={styles.logoBox}>
-            <span className="text-white font-bold text-lg tracking-wider">
-              CF
-            </span>
+            <img
+              src={LogoImg}
+              alt="Contigo Fiscal Logo"
+              className={styles.mainLogo}
+            />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col justify-center">
             <h1 className={styles.brandName}>
               Contigo <span>Fiscal</span>
             </h1>
@@ -31,7 +34,6 @@ export default function Header() {
           <a href="#contacto" className={styles.navLink}>
             Contacto
           </a>
-
           <button className={styles.ctaButton}>Solicitar asesoría</button>
         </nav>
 
