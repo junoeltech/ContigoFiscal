@@ -5,6 +5,7 @@ import Services from "../components/Services";
 import WhyChooseUs from "../components/WhyChooseUs";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
+import ChatbotWidget from "../components/ChatbotWidget";
 
 export default function HomePage() {
   return (
@@ -25,6 +26,9 @@ export default function HomePage() {
 
         {/* 5. Formulario de conversión y contacto directo */}
         <Contact />
+
+        {/* 6. Chatbot v1 */}
+        <ChatbotWidget />
       </main>
 
       {/* 6. Cierre de página y enlaces legales */}
