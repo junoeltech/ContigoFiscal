@@ -71,11 +71,12 @@ function ChatbotWidget() {
     };
 
     try {
-      await Service.createRequest(cliente); // Llamada a tu API de Spring Boot
+      console.log("Payload que se va a enviar:", cliente);
+      await Service.saveCliente(cliente); // Llamada a tu API de Spring Boot
       alert("¡Solicitud recibida! El contador te contactará pronto.");
       cancelar();
     } catch (error) {
-      alert("Error al enviar la solicitud.");
+      alert("Error al enviar la solicitud.", error);
     }
   };
 

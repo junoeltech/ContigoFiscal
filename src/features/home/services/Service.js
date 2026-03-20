@@ -47,7 +47,7 @@ class Services {
 
     // Guarda al prospecto en la DB al terminar el chat
     saveCliente(data) { 
-        return this.postData(endpoints.requests, data); 
+        return this.postData(`${endpoints.requests}/crear`, data); 
     }
 }
 export default new Services();
