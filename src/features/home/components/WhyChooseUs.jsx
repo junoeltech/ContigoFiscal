@@ -15,7 +15,7 @@ export default function WhyChooseUs() {
     },
     {
       title: "Experiencia Real",
-      desc: "Especialistas en Personas Físicas, Morales y RESICO.",
+      desc: "Especialistas en Personas Físicas, Morales.",
       icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
     },
   ];
@@ -28,23 +28,18 @@ export default function WhyChooseUs() {
     },
     {
       step: "02",
-      title: "Recolección Digital",
-      desc: "Subes tus documentos a nuestra plataforma segura.",
-    },
-    {
-      step: "03",
       title: "Ejecución Experta",
       desc: "Nosotros nos encargamos de toda la contabilidad.",
     },
     {
-      step: "04",
+      step: "03",
       title: "Resultados y Paz",
       desc: "Recibes tu acuse y duermes tranquilo.",
     },
   ];
 
   return (
-    <section className={styles.section}>
+    <section id="whychooseus" className={styles.section}>
       <div className={styles.container}>
         {/* Columna Izquierda: Valores */}
         <div className="space-y-8">
@@ -52,7 +47,7 @@ export default function WhyChooseUs() {
             <span className={styles.badge}>Diferencial</span>
             <h3 className={styles.title}>
               ¿Por qué confiar en <br />
-              <span style={{ color: "var(--brand-primary)" }}>
+              <span style={{ color: "var(--brand-accent)" }}>
                 Contigo Fiscal
               </span>
               ?

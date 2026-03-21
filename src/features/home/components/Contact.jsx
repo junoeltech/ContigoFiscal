@@ -3,56 +3,38 @@ import styles from "../styles/contact.module.css";
 
 export default function Contact() {
   return (
-    <section className={styles.section}>
+    <section id="contact" className={styles.section}>
       <div className={styles.grid}>
-        {/* Formulario Principal */}
-        <div className={styles.formCard}>
-          <div className="mb-8">
-            <h3 className="text-3xl font-black text-gray-900">
-              ¿Listo para empezar?
-            </h3>
-            <p className="mt-3 text-gray-600">
-              Cuéntanos tu situación y un especialista se pondrá en contacto
-              contigo en menos de 24 horas hábiles.
-            </p>
-          </div>
+        {/* Contenido de Confianza (Sustituye al formulario) */}
+        <div className={styles.trustContent}>
+          <h3 className="text-4xl font-black text-gray-900 leading-tight">
+            ¿Listo para poner tus{" "}
+            <span style={{ color: "var(--brand-accent)" }}>
+              impuestos en orden?
+            </span>
+          </h3>
+          <p className="mt-6 text-xl text-gray-600">
+            Simplificamos tu relación con el SAT para que tú te enfoques en
+            crecer tu negocio. Elige el medio que prefieras y hablemos.
+          </p>
 
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Nombre Completo</label>
-              <input className={styles.input} placeholder="Ej. Juan Pérez" />
-            </div>
-
-            <div className={styles.inputGroup}>
-              <label className={styles.label}>Correo Electrónico</label>
-              <input
-                type="email"
-                className={styles.input}
-                placeholder="tu@correo.com"
-              />
-            </div>
-
-            <div className={`${styles.inputGroup} md:col-span-2`}>
-              <label className={styles.label}>Teléfono / WhatsApp</label>
-              <input className={styles.input} placeholder="+52 55 0000 0000" />
-            </div>
-
-            <div className={`${styles.inputGroup} md:col-span-2`}>
-              <label className={styles.label}>Tu consulta</label>
-              <textarea
-                className={styles.textarea}
-                rows={4}
-                placeholder="¿En qué podemos ayudarte hoy?"
-              />
-            </div>
-
-            <button type="submit" className={styles.submitBtn}>
-              Enviar solicitud gratuita
-            </button>
-          </form>
+          <ul className="mt-8 space-y-4">
+            <li className="flex items-center gap-3 text-gray-700 font-medium">
+              <span className="text-green-500">✔</span> Asesoría fiscal
+              personalizada
+            </li>
+            <li className="flex items-center gap-3 text-gray-700 font-medium">
+              <span className="text-green-500">✔</span> Respuesta en menos de 24
+              horas
+            </li>
+            <li className="flex items-center gap-3 text-gray-700 font-medium">
+              <span className="text-green-500">✔</span> Expertos en
+              actualización fiscal 2026
+            </li>
+          </ul>
         </div>
 
-        {/* Barra Lateral */}
+        {/* Barra Lateral (Ahora como columna principal de contacto) */}
         <aside className={styles.sidebar}>
           <div className={styles.infoCard}>
             <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-white/5 rounded-full" />
@@ -62,7 +44,7 @@ export default function Contact() {
 
             <div className="space-y-6 text-white">
               <div className="flex items-start gap-4 group">
-                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-(--brand-primary) transition-colors">
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-blue-500 transition-colors">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -83,7 +65,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-(--brand-primary) transition-colors">
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-blue-500 transition-colors">
                   <svg
                     className="w-5 h-5"
                     fill="none"

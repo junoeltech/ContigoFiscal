@@ -1,127 +1,76 @@
 .section {
     max-width: 80rem;
     margin: 0 auto;
-    padding: 5rem 1.5rem;
+    padding: 3rem 1.5rem;
 }
 
 .grid {
     display: grid;
     gap: 3rem;
-    align-items: start;
+    align-items: center;
+    /* Centrado vertical para que el texto y las cards se alineen */
 }
 
 @media (min-width: 1024px) {
     .grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        /* Cambiamos a 2 columnas iguales */
+        grid-template-columns: 1fr 1fr;
     }
 }
 
-.formCard {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 1.5rem;
-    border: 1px solid #f3f4f6;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
-}
-
-@media (min-width: 768px) {
-    .formCard {
-        grid-column: span 2 / span 2;
-        padding: 2.5rem;
-    }
-}
-
-.inputGroup {
+.trustContent {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    justify-content: center;
 }
 
-.label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #9ca3af;
-    margin-left: 0.25rem;
-}
-
-.input,
-.textarea {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    border: 1px solid #e5e7eb;
-    background-color: #f9fafb;
-    outline: none;
-    transition: all 0.2s;
-}
-
-.input:focus,
-.textarea:focus {
-    background-color: white;
-    border-color: var(--brand-primary);
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-}
-
-.submitBtn {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    color: white;
-    font-weight: 700;
-    font-size: 1.125rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    background-color: var(--brand-primary);
-}
-
-.submitBtn:hover {
-    filter: brightness(1.1);
-}
-
-/* Sidebar */
+/* Sidebar ahora se adapta mejor como columna principal */
 .sidebar {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+
 }
 
 .infoCard {
-    padding: 2rem;
+    padding: 2.5rem;
     background-color: #111827;
-    /* gray-900 */
     color: white;
     border-radius: 1.5rem;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
+
 
 .whatsappBtn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 1rem;
     width: 100%;
-    padding: 1rem;
+    padding: 1.25rem;
     background-color: #22c55e;
     color: white;
-    font-weight: 700;
-    border-radius: 1rem;
+    font-weight: 800;
+    font-size: 1.1rem;
+    border-radius: 1.25rem;
     text-decoration: none;
-    transition: background-color 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .whatsappBtn:hover {
     background-color: #16a34a;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -5px rgba(34, 197, 94, 0.4);
 }
 
 .hoursCard {
-    padding: 2rem;
-    background-color: #eff6ff;
-    /* blue-50 */
-    border-radius: 1.5rem;
-    border: 1px solid #dbeafe;
+    padding: 2.5rem;
+    background-color: #f0f7ff;
+    border-radius: 2rem;
+    border: 2px solid #e0efff;
 }

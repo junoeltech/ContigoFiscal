@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/footer.module.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -116,12 +117,12 @@ export default function Footer() {
             <p>Hecho con precisión fiscal en México.</p>
           </div>
           <div className="flex gap-6 uppercase tracking-tighter font-bold">
-            <a href="#" className={styles.link}>
-              Aviso de Privacidad
-            </a>
-            <a href="#" className={styles.link}>
-              Términos
-            </a>
+            <Link to="/Privacypolicy" className={styles.link}>
+              Políticas de Privacidad
+            </Link>
+            <Link to="/Terms" className={styles.link}>
+              Terminos y Condiciones
+            </Link>
           </div>
         </div>
       </div>

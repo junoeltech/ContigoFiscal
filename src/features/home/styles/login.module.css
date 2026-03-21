@@ -1,0 +1,103 @@
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0d2c4f;
+    /* El azul oscuro de tu landing */
+    padding: 20px;
+}
+
+.loginCard {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.title {
+    color: #0d2c4f;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    border-color: #d4a34d;
+    /* El dorado de tus botones */
+}
+
+.button {
+    background-color: #d4a34d;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: #b88a3e;
+}
+
+/**/
+
+.passwordWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* El input dentro del wrapper debe ocupar todo el ancho */
+.passwordWrapper .input {
+    width: 100%;
+    padding-right: 45px;
+    /* Deja espacio para que el texto no se encime con el ojo */
+}
+
+.eyeButton {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: transform 0.2s ease;
+}
+
+.eyeButton:hover {
+    transform: scale(1.1);
+}
