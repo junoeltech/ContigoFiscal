@@ -17,3 +17,12 @@ body {
     /* O la que estés usando */
     -webkit-font-smoothing: antialiased;
 }
+
+/*Scroleo lento*/
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 100px;
+}

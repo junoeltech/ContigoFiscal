@@ -75,7 +75,7 @@
 }
 
 .brandName span {
-  color: #c59b45;
+  color: var(--brand-accent);
 }
 
 .tagline {

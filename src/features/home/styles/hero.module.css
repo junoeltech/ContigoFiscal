@@ -66,7 +66,7 @@
 /* Título */
 .title {
     font-size: 2.25rem;
-    font-weight: 900;
+    font-weight: 400;
     line-height: 1.1;
     letter-spacing: -0.025em;
 }
@@ -78,7 +78,7 @@
 }
 
 .satHighlight {
-    color: #fb923c;
+    color: var(--brand-accent);
     /* orange-400 */
 }
 

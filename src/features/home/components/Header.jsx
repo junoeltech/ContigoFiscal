@@ -25,13 +25,13 @@ export default function Header() {
 
         {/* Navegación Desktop */}
         <nav className={styles.nav}>
-          <a href="#servicios" className={styles.navLink}>
+          <a href="#services" className={styles.navLink}>
             Servicios
           </a>
-          <a href="#nosotros" className={styles.navLink}>
+          <a href="#whychooseus" className={styles.navLink}>
             ¿Por qué elegirnos?
           </a>
-          <a href="#contacto" className={styles.navLink}>
+          <a href="#contact" className={styles.navLink}>
             Contacto
           </a>
           <button className={styles.ctaButton}>Solicitar asesoría</button>

@@ -27,7 +27,7 @@
 }
 
 .badge {
-    color: var(--brand-primary);
+    color: var(--brand-accent);
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
