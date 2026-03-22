@@ -7,14 +7,14 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import ChatbotWidget from "../components/ChatbotWidget";
 
-export default function HomePage() {
+export default function HomePage({ isChatOpen, setIsChatOpen, onOpenChat }) {
   return (
     <>
       {/* 1. Navegación superior */}
-      <Header />
+      <Header onOpenChat={onOpenChat} />
 
       {/* 2. Sección de impacto principal */}
-      <Hero />
+      <Hero onOpenChat={onOpenChat}/>
 
       {/* 3. Catálogo de soluciones fiscales */}
       {/* Usamos un contenedor simple para dar espacio si es necesario */}
@@ -22,13 +22,14 @@ export default function HomePage() {
         <Services />
 
         {/* 4. Sección de valor agregado y proceso */}
-        <WhyChooseUs />
+        <WhyChooseUs onOpenChat={onOpenChat} />
 
         {/* 5. Formulario de conversión y contacto directo */}
         <Contact />
 
         {/* 6. Chatbot v1 */}
-        <ChatbotWidget />
+        <ChatbotWidget isExternalOpen={isChatOpen} 
+        setIsExternalOpen={setIsChatOpen}/>
       </main>
 
       {/* 6. Cierre de página y enlaces legales */}

@@ -2,9 +2,24 @@ import { useEffect, useState } from "react";
 import styles from "../styles/ChatbotWidget.module.css";
 import Service from "../services/Service";
 
-function ChatbotWidget() { 
-  const [open, setOpen] = useState(false);
+function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) { 
+  const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState("inicio");
+
+  useEffect(() => {
+        if (isExternalOpen) {
+            setIsOpen(true);
+            
+            if (typeof setIsExternalOpen === "function") {
+                setIsExternalOpen(false); 
+            }
+        }
+    }, [isExternalOpen, setIsExternalOpen]);
+
+  const closeChat = () => {
+    setIsOpen(false);
+    setIsExternalOpen(false); // Avisamos al padre que ya se cerró
+  };
   
   // Datos para el backend
   const [nombre, setNombre] = useState("");
@@ -36,7 +51,7 @@ function ChatbotWidget() {
     setStep("inicio");
     setNombre(""); setCorreo(""); setTelefono(""); setRfc("");
     setServicioId(""); setDocumentosRequeridos([]);
-    setOpen(false);
+    setIsOpen(false);
   };
 
   const handleSubmitDatos = (e) => {
@@ -82,9 +97,9 @@ function ChatbotWidget() {
 
   return (
     <div className={styles.chatbotWidget}>
-      <button className={styles.chatbotToggle} onClick={() => setOpen(!open)}>💬</button>
+      <button className={styles.chatbotToggle} onClick={() => setIsOpen(!isOpen)}>💬</button>
 
-      {open && (
+      {isOpen && (
         <div className={styles.chatbotWindow}>
           {/* PASO 1: PERFIL */}
           {step === "inicio" && (
@@ -138,5 +153,6 @@ function ChatbotWidget() {
     </div>
   );
 }
+
 
 export default ChatbotWidget;

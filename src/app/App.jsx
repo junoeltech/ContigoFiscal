@@ -12,6 +12,13 @@ import Login from "../features/home/components/login";
 import ProtectedRoute from "../features/home/components/ProtectedRouter"; // Asegúrate que el archivo se llame así
 
 function App() {
+
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const toggleChat = () => {
+    setIsChatOpen(true); // O setIsChatOpen(!isChatOpen) para que abra y cierre
+  };
+
   // 1. Inicializamos el estado buscando si ya había un usuario en el navegador
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user_session");
@@ -35,7 +42,16 @@ function App() {
       <main>
         <Routes>
           {/* Rutas Públicas */}
-          <Route path="/" element={<HomePage />} />
+          <Route 
+            path="/" 
+            element={
+              <HomePage 
+                isChatOpen={isChatOpen} 
+                setIsChatOpen={setIsChatOpen} 
+                onOpenChat={toggleChat} 
+              />
+            } 
+          />
           <Route path="/Privacypolicy" element={<Privacypolicy />} />
           <Route path="/Terms" element={<Terms />} />
 

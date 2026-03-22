@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/hero.module.css";
 
-export default function Hero() {
+export default function Hero({ onOpenChat }) {
   return (
     <section className={styles.heroSection}>
       <div className={styles.decorationCircle} />
@@ -28,7 +28,8 @@ export default function Hero() {
           </p>
 
           <div className={styles.buttonGroup}>
-            <button className={styles.primaryBtn}>Agenda una consulta</button>
+            <button className={`${styles.primaryBtn} ${styles.ctaButton}`} 
+                        onClick={onOpenChat}>Agenda una consulta</button>
             <button className={styles.secondaryBtn}>Ver servicios</button>
           </div>
 

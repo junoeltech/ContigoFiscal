@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/whychooseus.module.css";
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({ onOpenChat }) {
   const benefits = [
     {
       title: "Claridad Absoluta",
@@ -120,7 +120,8 @@ export default function WhyChooseUs() {
             ))}
           </div>
 
-          <button className={styles.submitBtn}>
+          <button className={`${styles.submitBtn} ${styles.ctaButton}`} 
+                      onClick={onOpenChat}>
             Empezar mi diagnóstico hoy
           </button>
         </div>
