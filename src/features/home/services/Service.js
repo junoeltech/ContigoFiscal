@@ -49,5 +49,18 @@ class Services {
     saveCliente(data) { 
         return this.postData(`${endpoints.requests}/crear`, data); 
     }
+
+    async login(email, password) {
+        try {
+            // Enviamos las credenciales al endpoint de autenticación
+            const response = await axios.post("http://localhost:8081/api/auth/login", {
+            email: email,
+            password: password
+            });
+            return response.data; // El backend debería retornar algo como { email: "...", role: "ADMIN" }
+        } catch (error) {
+            throw error.response?.data?.message || "Error al iniciar sesión";
+        }
+}
 }
 export default new Services();

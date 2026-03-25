@@ -2,12 +2,12 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 9999;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  z-index: 1000;
 }
 
 .chatbotToggle {
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, #ff6ec4, #7873f5);
   color: white;
   border: none;
   border-radius: 50%;
@@ -15,68 +15,90 @@
   height: 65px;
   font-size: 26px;
   cursor: pointer;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .chatbotToggle:hover {
-  transform: scale(1.1);
-  background: linear-gradient(135deg, #0056b3, #003f7f);
+  transform: scale(1.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 .chatbotWindow {
   position: absolute;
-  bottom: 80px;
+  bottom: 90px;
   right: 0;
-  width: 320px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  width: 380px;
+  max-height: 520px;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s ease;
 }
 
 .chatbotWindow p {
-  margin-bottom: 1rem;
+  margin-bottom: 12px;
   font-weight: 600;
-  color: #333;
-}
-
-.chatbotWindow input,
-.chatbotWindow textarea {
-  margin: 0.4rem 0;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.chatbotWindow textarea {
-  resize: vertical;
-  min-height: 80px;
+  color: #444;
 }
 
 .chatbotWindow button {
-  display: block;
-  width: 100%;
-  margin: 0.4rem 0;
-  padding: 0.7rem;
-  border: none;
-  border-radius: 8px;
-  background: #007bff;
+  background: linear-gradient(135deg, #42e695, #3bb2b8);
   color: white;
-  font-weight: 500;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 25px;
+  margin: 6px 0;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: transform 0.2s, opacity 0.3s;
 }
 
 .chatbotWindow button:hover {
-  background: #0056b3;
   transform: translateY(-2px);
+  opacity: 0.9;
 }
 
-.cancelBtn {
-  background: #dc3545;
+.chatbotWindow input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
-.cancelBtn:hover {
-  background: #a71d2a;
+.chatbotWindow input:focus {
+  border: 1px solid #7873f5;
+  box-shadow: 0 0 6px rgba(120,115,245,0.4);
+}
+
+.docList {
+  list-style: none;
+  padding: 0;
+}
+
+.docList li {
+  background: #fefefe;
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  border-left: 4px solid #7873f5;
+}
+
+.backBtn {
+  background: linear-gradient(135deg, #ff6a6a, #d32f2f) !important;
+}
+
+.backBtn:hover {
+  opacity: 0.85 !important;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }

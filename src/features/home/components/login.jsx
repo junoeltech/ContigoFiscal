@@ -1,17 +1,28 @@
 import React, { useState } from "react";
 import styles from "../styles/login.module.css";
+import Service from "../services/Service"; // Importa tu clase de servicio
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email === "admin@contigofiscal.com" && pass === "123456") {
-      onLogin({ email, role: "admin" });
-    } else {
-      alert("Credenciales incorrectas");
+    setLoading(true);
+
+    try {
+      
+      const userData = await Service.login(email, pass);
+      
+      
+      onLogin(userData); 
+      
+    } catch (error) {
+      alert(error); 
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -30,32 +41,36 @@ const Login = ({ onLogin }) => {
             placeholder="Correo electrónico"
             autoComplete="username"
             required
+            disabled={loading}
           />
 
-          {/* Contenedor relativo para el icono */}
           <div className={styles.passwordWrapper}>
             <input
               className={styles.input}
-              // Alternamos el tipo de input según el estado
               type={showPassword ? "text" : "password"}
               value={pass}
               onChange={(e) => setPass(e.target.value)}
               placeholder="Contraseña"
               autoComplete="current-password"
               required
+              disabled={loading}
             />
             <button
               type="button"
               className={styles.eyeButton}
               onClick={() => setShowPassword(!showPassword)}
-              tabIndex="-1" // Evita que el tabulador se detenga aquí
+              tabIndex="-1"
             >
               {showPassword ? "🙈" : "👁️"}
             </button>
           </div>
 
-          <button className={styles.button} type="submit">
-            Entrar al Dashboard
+          <button 
+            className={styles.button} 
+            type="submit" 
+            disabled={loading}
+          >
+            {loading ? "Verificando..." : "Entrar al Dashboard"}
           </button>
         </form>
       </div>
