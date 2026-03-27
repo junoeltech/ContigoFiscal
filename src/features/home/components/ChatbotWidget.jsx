@@ -1,44 +1,44 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/ChatbotWidget.module.css";
 import Service from "../services/Service";
+import ToastNotification from "./ToastNotification";
 
 function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) { 
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState("inicio");
+  const [toast, setToast] = useState(null); // Estado para el aviso
 
   useEffect(() => {
-        if (isExternalOpen) {
-            setIsOpen(true);
-            
-            if (typeof setIsExternalOpen === "function") {
-                setIsExternalOpen(false); 
-            }
-        }
-    }, [isExternalOpen, setIsExternalOpen]);
+    if (isExternalOpen) {
+      setIsOpen(true);
+      if (typeof setIsExternalOpen === "function") {
+        setIsExternalOpen(false); 
+      }
+    }
+  }, [isExternalOpen, setIsExternalOpen]);
 
   const closeChat = () => {
     setIsOpen(false);
-    setIsExternalOpen(false); // Avisamos al padre que ya se cerró
+    setIsExternalOpen(false);
   };
-  
+
   // Datos para el backend
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState("");
   const [rfc, setRfc] = useState("");
-  const [tipoUsuario, setTipoUsuario] = useState(""); // "persona_fisica" o "persona_moral"
-  const [servicioId, setServicioId] = useState(""); // UUID del servicio
-  
+  const [tipoUsuario, setTipoUsuario] = useState("");
+  const [servicioId, setServicioId] = useState("");
+
   // Catálogos del backend
   const [serviciosList, setServiciosList] = useState([]); 
   const [documentosRequeridos, setDocumentosRequeridos] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // 1. Cargar servicios al iniciar
   useEffect(() => {
     const fetchServicios = async () => {
       try {
-        const data = await Service.getServicios(); // GET /api/catalogs/services
+        const data = await Service.getServicios();
         setServiciosList(data);
       } catch (error) {
         console.error("Error cargando servicios", error);
@@ -59,12 +59,11 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) {
     setStep("tramite");
   };
 
-  // 2. Lógica dinámica: Seleccionar trámite y buscar documentos (Sprint 2)
   const handleSelectTramite = async (id) => {
     setServicioId(id);
     setLoading(true);
     try {
-      const docs = await Service.getDocumentosPorServicio(id); // GET /api/catalogs/services/{id}/documents
+      const docs = await Service.getDocumentosPorServicio(id);
       setDocumentosRequeridos(docs);
       setStep("confirmacion");
     } catch (error) {
@@ -74,24 +73,14 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) {
     }
   };
 
-  // 3. Enviar registro final al Backend (POST /api/requests)
   const handleFinalizar = async () => {
-    const cliente = {
-      nombreCompleto: nombre,
-      correo: correo,
-      telefono: telefono,
-      rfc: rfc,
-      tipoContribuyente: tipoUsuario,
-      servicioId: servicioId
-    };
-
+    const cliente = { nombreCompleto: nombre, correo, telefono, rfc, tipoContribuyente: tipoUsuario, servicioId };
     try {
-      console.log("Payload que se va a enviar:", cliente);
-      await Service.saveCliente(cliente); // Llamada a tu API de Spring Boot
-      alert("¡Solicitud recibida! El contador te contactará pronto.");
+      await Service.saveCliente(cliente);
+      setToast({ type: "success", message: "¡Solicitud recibida! El contador te contactará pronto." });
       cancelar();
     } catch (error) {
-      alert("Error al enviar la solicitud.", error);
+      setToast({ type: "error", message: "Error al enviar la solicitud." });
     }
   };
 
@@ -101,6 +90,15 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) {
 
       {isOpen && (
         <div className={styles.chatbotWindow}>
+          {/* Aviso tipo toast */}
+          {toast && (
+            <ToastNotification
+              type={toast.type}
+              message={toast.message}
+              onClose={() => setToast(null)}
+            />
+          )}
+
           {/* PASO 1: PERFIL */}
           {step === "inicio" && (
             <>
@@ -122,7 +120,7 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) {
             </form>
           )}
 
-          {/* PASO 3: SELECCIÓN DE TRÁMITE (Dinámico desde DB) */}
+          {/* PASO 3: SELECCIÓN DE TRÁMITE */}
           {step === "tramite" && (
             <>
               <p>¿Qué trámite necesitas, {nombre}?</p>
@@ -134,7 +132,7 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) {
             </>
           )}
 
-          {/* PASO 4: CONFIRMACIÓN Y REQUISITOS (HU2) */}
+          {/* PASO 4: CONFIRMACIÓN */}
           {step === "confirmacion" && (
             <div>
               <p>Excelente. Para este trámite necesitaremos:</p>
@@ -153,6 +151,5 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) {
     </div>
   );
 }
-
 
 export default ChatbotWidget;
