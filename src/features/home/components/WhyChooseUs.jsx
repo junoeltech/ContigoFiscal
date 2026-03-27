@@ -47,7 +47,7 @@ export default function WhyChooseUs({ onOpenChat }) {
             <span className={styles.badge}>Diferencial</span>
             <h3 className={styles.title}>
               ¿Por qué confiar en <br />
-              <span style={{ color: "var(--brand-accent)" }}>
+              <span style={{ color: "var(--brand-primary)" }}>
                 Contigo Fiscal
               </span>
               ?
@@ -120,8 +120,10 @@ export default function WhyChooseUs({ onOpenChat }) {
             ))}
           </div>
 
-          <button className={`${styles.submitBtn} ${styles.ctaButton}`} 
-                      onClick={onOpenChat}>
+          <button
+            className={`${styles.submitBtn} ${styles.ctaButton}`}
+            onClick={onOpenChat}
+          >
             Empezar mi diagnóstico hoy
           </button>
         </div>

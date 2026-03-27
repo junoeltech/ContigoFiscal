@@ -1,0 +1,442 @@
+.dashboardContainer {
+    padding: 2.5rem;
+    background-color: #f1f5f9;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- TOAST NOTIFICATIONS --- */
+.toast {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: white;
+    border-radius: 12px;
+    z-index: 3000;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.4s ease-out;
+    border-left: 5px solid transparent;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.success {
+    border-left-color: #10b981;
+}
+
+.error {
+    border-left-color: #ef4444;
+}
+
+/* --- HEADER --- */
+.dashHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1rem;
+}
+
+.headerInfo h1 {
+    color: #0d2c4f;
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.logoutBtn {
+    background: white;
+    color: #0d2c4f;
+    border: 2px solid #0d2c4f;
+    padding: 0.5rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* --- FILTROS --- */
+.filtersSection {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dateRangeGroup {
+    display: flex;
+    gap: 1rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.inputGroup label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+}
+
+.filterInput {
+    padding: 0.6rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+}
+
+.filterInput:focus {
+    border-color: #d4a34d;
+}
+
+.clearBtn {
+    align-self: flex-end;
+    padding: 0.6rem 1rem;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+/* --- TABLA --- */
+.tableWrapper {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.leadsTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.leadsTable th {
+    background: #0d2c4f;
+    color: white;
+    padding: 1.2rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.leadsTable td {
+    padding: 1.2rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.clientName {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.serviceTag {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Estados Fila */
+.nuevo {
+    background-color: #fffcfc;
+}
+
+.proceso {
+    background-color: #fffdf5;
+}
+
+.finalizado {
+    background-color: #f0fdf4;
+    opacity: 0.8;
+}
+
+.finalizado .clientName {
+    text-decoration: line-through;
+    color: #166534;
+}
+
+/* Puntos de Estado */
+.statusDot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 0 auto;
+}
+
+.dot_nuevo {
+    background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+.dot_proceso {
+    background: #f59e0b;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.dot_finalizado {
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+/*Notificaciones de status de solicitudes*/
+
+.toast {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    z-index: 3000;
+    animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-left: 5px solid transparent;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast p {
+    margin: 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #1e293b;
+}
+
+/* Colores Dinámicos según el tipo (Crucial para tu petición de color por estado) */
+.nuevo {
+    border-left-color: #ff0000;
+}
+
+/* Azul Informátivo */
+.proceso {
+    border-left-color: #f59e0b;
+}
+
+/* Amarillo/Naranja de atención */
+.finalizado {
+    border-left-color: #10b981;
+}
+
+/* Verde Éxito */
+.success {
+    border-left-color: #10b981;
+}
+
+/* Verde Esmeralda (para guardar) */
+.error {
+    border-left-color: #ef4444;
+}
+
+/* Rojo (para eliminar) */
+
+.toastIcon {
+    font-size: 1.2rem;
+}
+
+/* Ajuste Responsivo Toast */
+@media (max-width: 768px) {
+    .toast {
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+        width: calc(100% - 2rem);
+    }
+}
+
+/* --- MODAL --- */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 44, 79, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modalDetail {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    animation: slideUp 0.3s ease;
+    position: relative;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+}
+
+.closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: #94a3b8;
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.infoSection {
+    margin-top: 1.5rem;
+}
+
+.infoSection h4 {
+    font-size: 0.7rem;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.messageBox {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #d4a34d;
+    font-style: italic;
+    color: #475569;
+}
+
+.whatsappBtn {
+    display: block;
+    text-align: center;
+    background: #25d366;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 1rem;
+}
+
+.adminNotes {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 0.5rem;
+    resize: none;
+    font-family: inherit;
+}
+
+.modalFooterBtns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.actionBtn {
+    background: #d4a34d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.saveNotesBtn {
+    background: #0d2c4f;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 768px) {
+    .dashboardContainer {
+        padding: 1rem;
+    }
+
+    .dashHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .filtersSection {
+        flex-direction: column;
+    }
+
+    .dateRangeGroup {
+        flex-direction: column;
+    }
+
+    .tableWrapper {
+        overflow-x: auto;
+    }
+
+    .leadsTable {
+        min-width: 700px;
+    }
+}

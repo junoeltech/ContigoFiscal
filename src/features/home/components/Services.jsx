@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/services.module.css";
+import { SERVICES_DATA } from "../constants/servicesData";
+import ServiceModal from "./ServiceModal";
 
 export default function Services() {
+  const [selectedService, setSelectedService] = useState(null);
+
   return (
     <section id="services" className={styles.servicesSection}>
       <div className={styles.header}>
@@ -17,138 +21,207 @@ export default function Services() {
             correcta y sin complicaciones.
           </p>
         </div>
-        <button className={styles.catalogBtn}>Descargar catálogo</button>
+        {/* <button className={styles.catalogBtn}>Descargar catálogo</button> */}
       </div>
 
       <div className={styles.grid}>
-        {/* Card 1: Declaraciones */}
-        <article className={styles.card}>
-          <div className={styles.iconBox}>
+        {/* Tarjeta 1: Declaración */}
+        <article
+          className={styles.card}
+          onClick={() => setSelectedService(SERVICES_DATA.declaraciones)}
+        >
+          <div className={`${styles.iconBox} ${styles.blueGrad}`}>
             <svg
-              width="28"
-              height="28"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
-              <polyline points="10 9 9 9 8 9" />
-            </svg>
-          </div>
-          <h4 className={styles.cardTitle}>
-            Declaraciones Anuales y Mensuales
-          </h4>
-          <p className={styles.cardText}>
-            Especialistas en RESICO, honorarios y arrendamiento. Garantizamos el
-            cálculo exacto para evitar requerimientos.
-          </p>
-          <div className={styles.tagGroup}>
-            <span className={styles.tag}>Personas Físicas</span>
-            <span className={styles.tag}>RESICO</span>
-          </div>
-        </article>
-
-        {/* Card 2: Asesoría */}
-        <article className={styles.card}>
-          <div className={styles.iconBox}>
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3z" />
-            </svg>
-          </div>
-          <h4 className={styles.cardTitle}>Planeación Fiscal</h4>
-          <p className={styles.cardText}>
-            Orientación estratégica para optimizar tu carga tributaria
-            legalmente y evitar multas innecesarias.
-          </p>
-        </article>
-
-        {/* Card 3: Trámites */}
-        <article className={styles.card}>
-          <div className={styles.iconBox}>
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-          </div>
-          <h4 className={styles.cardTitle}>Trámites y e.firma</h4>
-          <p className={styles.cardText}>
-            Renovación de firmas, actualización de RFC y atención de
-            requerimientos directos de la autoridad.
-          </p>
-        </article>
-
-        {/* Card 4: Regularización (Especial) */}
-        <article className={styles.specialCard}>
-          <div className={styles.specialContent}>
-            <div className="flex-1">
-              <h4 className="text-2xl font-bold text-white">
-                ¿Tienes adeudos o años sin declarar?
-              </h4>
-              <p className="mt-2 text-blue-100/80">
-                Nuestro servicio de regularización pone al día tu situación
-                fiscal rápidamente, negociando actualizaciones y recargos.
-              </p>
-              <button className={styles.specialBtn}>
-                Solicitar Regularización
-              </button>
-            </div>
-            <div className="hidden md:flex w-32 h-32 bg-white/10 rounded-full items-center justify-center border border-white/20">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
+              <path
+                d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"
+                stroke="currentColor"
                 strokeWidth="1.5"
-              >
-                <path
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
+              />
+              <path
+                d="M7 7H17M7 12H17M7 17H13"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <circle
+                cx="17"
+                cy="17"
+                r="3"
+                fill="currentColor"
+                fillOpacity="0.2"
+              />
+            </svg>
           </div>
+          <h4 className={styles.cardTitle}>Declaración de impuestos</h4>
+          <p className={styles.cardText}>
+            Determinación, cálculo y presentación de obligaciones ante el SAT.
+          </p>
         </article>
 
-        {/* Card 5: Contabilidad */}
-        <article className={styles.card}>
-          <h4 className={styles.cardTitle}>Contabilidad Mensual</h4>
-          <p className={styles.cardText}>
-            Registro sistemático de tus ingresos y gastos con conciliación
-            bancaria para que siempre tengas el control.
-          </p>
-          <div className="mt-6 h-1 bg-gray-100 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-orange-400"
-              style={{ width: "66%" }}
-            ></div>
+        {/* Tarjeta 2: Asesoría */}
+        <article
+          className={styles.card}
+          onClick={() => setSelectedService(SERVICES_DATA.asesoria)}
+        >
+          <div className={`${styles.iconBox} ${styles.goldGrad}`}>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 15L15 12M15 12L12 9M15 12H9"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M8 12C8 9.79086 9.79086 8 12 8"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                fill="currentColor"
+                fillOpacity="0.1"
+              />
+            </svg>
           </div>
+          <h4 className={styles.cardTitle}>Asesoría Personalizada</h4>
+          <p className={styles.cardText}>
+            Estrategias diseñadas para optimizar tu carga fiscal legalmente.
+          </p>
+        </article>
+
+        {/* Tarjeta 3: Trámites */}
+        <article
+          className={styles.card}
+          onClick={() => setSelectedService(SERVICES_DATA.tramites)}
+        >
+          <div className={`${styles.iconBox} ${styles.blueGrad}`}>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="3"
+                y="6"
+                width="18"
+                height="15"
+                rx="2"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M16 10V5C16 3.89543 15.1046 3 14 3H10C8.89543 3 8 3.89543 8 5V10"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <circle
+                cx="12"
+                cy="13"
+                r="2"
+                fill="currentColor"
+                fillOpacity="0.2"
+                stroke="currentColor"
+                strokeWidth="1"
+              />
+            </svg>
+          </div>
+          <h4 className={styles.cardTitle}>Trámites SAT</h4>
+          <p className={styles.cardText}>
+            Gestión de e.firma, RFC y requerimientos sin complicaciones.
+          </p>
+        </article>
+
+        {/* Tarjeta 4: Contabilidad */}
+        <article
+          className={styles.card}
+          onClick={() => setSelectedService(SERVICES_DATA.contabilidad)}
+        >
+          <div className={`${styles.iconBox} ${styles.goldGrad}`}>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21 7V17C21 19.2091 18.7614 21 16 21H8C5.23858 21 3 19.2091 3 17V7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M21 7C21 9.20914 18.7614 11 16 11H8C5.23858 11 3 9.20914 3 7C3 4.79086 5.23858 3 8 3H16C18.7614 3 21 4.79086 21 7Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M11 15H13"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+          <h4 className={styles.cardTitle}>Contabilidad Integral</h4>
+          <p className={styles.cardText}>
+            Control y administración financiera para orden permanente.
+          </p>
+        </article>
+
+        {/* Tarjeta 5: Regularización */}
+        <article
+          className={styles.card}
+          onClick={() => setSelectedService(SERVICES_DATA.regularizacion)}
+        >
+          <div className={`${styles.iconBox} ${styles.blueGrad}`}>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M9 12L11 14L15 10"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M12 22V2"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                strokeDasharray="2 2"
+              />
+            </svg>
+          </div>
+          <h4 className={styles.cardTitle}>Regularización Fiscal</h4>
+          <p className={styles.cardText}>
+            Corrección de atrasos y omisiones de forma estratégica.
+          </p>
         </article>
       </div>
+
+      <ServiceModal
+        service={selectedService}
+        onClose={() => setSelectedService(null)}
+      />
     </section>
   );
 }

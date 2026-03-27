@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/footer.module.css";
 import { Link } from "react-router-dom";
+import LogoSvg from "../../../assets/ContigoFiscal.svg";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,7 +14,13 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-(--brand-primary)">
-                <span className="text-white font-bold text-sm">CF</span>
+                <div className={styles.logoBox}>
+                  <img
+                    src={LogoSvg}
+                    alt="Contigo Fiscal Logo"
+                    className={styles.mainLogo}
+                  />
+                </div>
               </div>
               <span className="text-xl font-bold text-white tracking-tight">
                 Contigo Fiscal
@@ -30,23 +37,23 @@ export default function Footer() {
           <div>
             <h4 className={styles.columnTitle}>Navegación</h4>
             <ul className={styles.linkList}>
-              <li className={styles.linkItem}>
-                <a href="#" className={styles.link}>
+              {/* <li className={styles.linkItem}>
+                <a href="#start" className={styles.link}>
                   Inicio
                 </a>
-              </li>
+              </li> */}
               <li className={styles.linkItem}>
-                <a href="#servicios" className={styles.link}>
+                <a href="#services" className={styles.link}>
                   Servicios Fiscales
                 </a>
               </li>
               <li className={styles.linkItem}>
-                <a href="#nosotros" className={styles.link}>
+                <a href="#whychooseus" className={styles.link}>
                   ¿Por qué elegirnos?
                 </a>
               </li>
               <li className={styles.linkItem}>
-                <a href="#contacto" className={styles.link}>
+                <a href="#contact" className={styles.link}>
                   Contacto
                 </a>
               </li>
@@ -58,23 +65,28 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>Servicios</h4>
             <ul className={styles.linkList}>
               <li className={styles.linkItem}>
-                <a href="#" className={styles.link}>
-                  Declaración Anual
+                <a href="#services" className={styles.link}>
+                  Declaración de impuestos
                 </a>
               </li>
               <li className={styles.linkItem}>
-                <a href="#" className={styles.link}>
-                  Régimen RESICO
+                <a href="#services" className={styles.link}>
+                  Asesoria personalizada
                 </a>
               </li>
               <li className={styles.linkItem}>
-                <a href="#" className={styles.link}>
-                  Trámites e.firma
+                <a href="#services" className={styles.link}>
+                  Tramites SAT
                 </a>
               </li>
               <li className={styles.linkItem}>
-                <a href="#" className={styles.link}>
-                  Contabilidad Mensual
+                <a href="#services" className={styles.link}>
+                  Contabilidad integral
+                </a>
+              </li>
+              <li className={styles.linkItem}>
+                <a href="#services" className={styles.link}>
+                  Regularización fiscal
                 </a>
               </li>
             </ul>

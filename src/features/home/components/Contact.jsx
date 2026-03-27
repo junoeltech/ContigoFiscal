@@ -9,7 +9,7 @@ export default function Contact() {
         <div className={styles.trustContent}>
           <h3 className="text-4xl font-black text-gray-900 leading-tight">
             ¿Listo para poner tus{" "}
-            <span style={{ color: "var(--brand-accent)" }}>
+            <span style={{ color: "var(--brand-primary)" }}>
               impuestos en orden?
             </span>
           </h3>
