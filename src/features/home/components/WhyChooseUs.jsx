@@ -26,8 +26,13 @@ export default function WhyChooseUs({ onOpenChat }) {
       title: "Diagnóstico Inicial",
       desc: "Analizamos tu situación actual sin costo.",
     },
-    {
+     {
       step: "02",
+      title: "Recolección de Documentos",
+      desc: "Recopilamos tu información fiscal",
+    },
+    {
+      step: "03",
       title: "Ejecución Experta",
       desc: "Nosotros nos encargamos de toda la contabilidad.",
     },
@@ -47,7 +52,7 @@ export default function WhyChooseUs({ onOpenChat }) {
             <span className={styles.badge}>Diferencial</span>
             <h3 className={styles.title}>
               ¿Por qué confiar en <br />
-              <span style={{ color: "var(--brand-accent)" }}>
+              <span style={{ color: "var(--brand-primary)" }}>
                 Contigo Fiscal
               </span>
               ?
@@ -120,8 +125,10 @@ export default function WhyChooseUs({ onOpenChat }) {
             ))}
           </div>
 
-          <button className={`${styles.submitBtn} ${styles.ctaButton}`} 
-                      onClick={onOpenChat}>
+          <button
+            className={`${styles.submitBtn} ${styles.ctaButton}`}
+            onClick={onOpenChat}
+          >
             Empezar mi diagnóstico hoy
           </button>
         </div>

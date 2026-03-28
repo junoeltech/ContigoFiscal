@@ -142,19 +142,94 @@
     }
 }
 
-.mockupCard {
+/* =========================================
+   NUEVO: CARRUSEL INFINITO (Lado Derecho) 
+   ========================================= */
+
+.carouselWrapper {
+    display: none;
+    /* Oculto en móviles por defecto */
     position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* Difuminado a los lados (mascara) para que las imágenes no corten feo */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
     z-index: 20;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transform: rotate(3deg);
-    transition: transform 0.5s;
 }
 
-.mockupCard:hover {
-    transform: rotate(0deg);
+@media (min-width: 1024px) {
+    .carouselWrapper {
+        display: block;
+    }
+}
+
+/* =========================================
+   NUEVO: SLIDESHOW (Lado Derecho) 
+   ========================================= */
+
+.slideshowWrapper {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    /* Altura fija para que el contenido no salte */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+
+@media (min-width: 1024px) {
+    .slideshowWrapper {
+        display: flex;
+    }
+}
+
+.slideshowImage {
+
+    width: 100%;
+    height: 300px;
+    max-width: 400px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.3));
+    animation: fadeSlideUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* --- ANIMACIÓN DE TRANSICIÓN --- */
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- PUNTITOS INDICADORES (DOTS) --- */
+.dotsContainer {
+    display: flex;
+    gap: 10px;
+    margin-top: 3rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.activeDot {
+    background-color: var(--brand-accent);
+    /* Esto usa tu color naranja/dorado */
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(212, 163, 77, 0.5);
+    /* Brillito extra al activo */
 }

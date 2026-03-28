@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react"; // Necesitamos useState
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Services from "../components/Services";
@@ -6,35 +6,43 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import ChatbotWidget from "../components/ChatbotWidget";
+import GlobalToast from "../components/GlobalToast"; // 1. Importa tu componente
 
-export default function HomePage({ 
-  isChatOpen, 
-  setIsChatOpen, 
-  onOpenChat,
-  setGlobalToast // ✅ RECIBIMOS LA PROP
-}) {
+export default function HomePage({ isChatOpen, setIsChatOpen, onOpenChat }) {
+  // 2. Definimos el estado que el Chatbot va a usar
+  const [toast, setToast] = useState(null);
+
   return (
     <>
-      {/* 1. Navegación superior */}
+      {/* 3. Si hay un toast en el estado, mostramos tu componente */}
+      {toast && (
+        <GlobalToast 
+          type={toast.type} 
+          message={toast.message} 
+          onClose={() => setToast(null)} 
+        />
+      )}
+
       <Header onOpenChat={onOpenChat} />
 
-      {/* 2. Sección principal */}
+
       <Hero onOpenChat={onOpenChat}/>
+
+
+      {/* 3. Catálogo de soluciones fiscales */}
 
       <main>
         <Services />
-
-        {/* 4. Sección de valor */}
         <WhyChooseUs onOpenChat={onOpenChat} />
-
-        {/* 5. Contacto */}
         <Contact />
 
-        {/* 6. CHATBOT */}
+
+        {/* 4. Pasamos la función 'setToast' al Chatbot (usando el nombre que él espera) */}
         <ChatbotWidget 
-          isExternalOpen={isChatOpen} 
-          setIsExternalOpen={setIsChatOpen}
-          setGlobalToast={setGlobalToast} // ✅ AQUÍ ESTÁ LA CLAVE
+          isChatOpen={isChatOpen} 
+          setIsChatOpen={setIsChatOpen} 
+          setGlobalToast={setToast} 
+
         />
       </main>
 

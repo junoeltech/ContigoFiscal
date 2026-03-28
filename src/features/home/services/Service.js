@@ -49,5 +49,35 @@ class Services {
     saveCliente(data) { 
         return this.postData(`${endpoints.requests}/crear`, data); 
     }
+
+    async login(email, password) {
+        try {
+            // Enviamos las credenciales al endpoint de autenticación
+            const response = await axios.post("http://localhost:8081/api/auth/login", {
+            email: email,
+            password: password
+            });
+            return response.data; // El backend debería retornar algo como { email: "...", role: "ADMIN" }
+        } catch (error) {
+            throw error.response?.data?.message || "Error al iniciar sesión";
+        }
+}
+
+
+getAllRequests() {
+    return this.fetchData(`${endpoints.requests}/consultar`); 
+}
+
+
+updateRequestStatus(id, nuevoStatus) {
+  
+    return axios.patch(`${endpoints.requests}/${id}/status?status=${nuevoStatus}`);
+}
+
+deleteRequest(id) {
+    return axios.delete(`${endpoints.requests}/${id}`);
+}
+
+
 }
 export default new Services();

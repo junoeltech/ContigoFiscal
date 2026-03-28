@@ -5,21 +5,21 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useState } from "react";
+
+// 1. IMPORTA TUS COMPONENTES (Ajusta las rutas según tu carpetas)
 import HomePage from "../features/home/pages/HomePage";
 import Privacypolicy from "../features/home/components/Privacypolicy";
 import Terms from "../features/home/components/Terms";
 import Login from "../features/home/components/login";
 import ProtectedRoute from "../features/home/components/ProtectedRouter";
-import GlobalToast from "../features/home/components/GlobalToast";
+import DashboardAdmin from "../features/home/components/Dashboard"; // <--- Tu nuevo componente
 
 function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [toast, setToast] = useState(null);
+  const toggleChat = () => setIsChatOpen(true);
+  const [toast, setToast] = useState(null); // Estado global para el toast
 
-  const toggleChat = () => {
-    setIsChatOpen(true);
-  };
-
+  // Estado del usuario con persistencia en localStorage
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user_session");
     return savedUser ? JSON.parse(savedUser) : null;
@@ -39,24 +39,22 @@ function App() {
     <Router>
       <main>
         <Routes>
-
-          {/* HOME */}
-          <Route 
-            path="/" 
+          {/* Rutas Públicas */}
+          <Route
+            path="/"
             element={
-              <HomePage 
-                isChatOpen={isChatOpen} 
-                setIsChatOpen={setIsChatOpen} 
-                onOpenChat={toggleChat} 
-                setGlobalToast={setToast} // ✅ AQUÍ SE PASA
+              <HomePage
+                isChatOpen={isChatOpen}
+                setIsChatOpen={setIsChatOpen}
+                onOpenChat={toggleChat}
+                setGlobalToast={setToast}
               />
-            } 
+            }
           />
-
           <Route path="/Privacypolicy" element={<Privacypolicy />} />
           <Route path="/Terms" element={<Terms />} />
 
-          {/* LOGIN */}
+          {/* Login: Redirige al dashboard si ya hay sesión */}
           <Route
             path="/login"
             element={
@@ -68,53 +66,22 @@ function App() {
             }
           />
 
-          {/* DASHBOARD */}
+          {/* RUTA PROTEGIDA: Aquí es donde conectamos el DashboardAdmin */}
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute isAllowed={!!user}>
-                <Dashboard onLogout={handleLogout} />
+                <DashboardAdmin onLogout={handleLogout} />
               </ProtectedRoute>
             }
           />
 
+          {/* Redirección por defecto */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
-
-      {/* ✅ TOAST GLOBAL */}
-      {toast && (
-        <GlobalToast
-          type={toast.type}
-          message={toast.message}
-          onClose={() => setToast(null)}
-        />
-      )}
     </Router>
   );
 }
-
-/* DASHBOARD */
-const Dashboard = ({ onLogout }) => (
-  <div style={{ padding: "40px", textAlign: "center", fontFamily: "sans-serif" }}>
-    <h1 style={{ color: "#0d2c4f" }}>Bienvenido al Panel de Contigo Fiscal</h1>
-    <p>Aquí verás los datos enviados por los clientes.</p>
-
-    <button
-      onClick={onLogout}
-      style={{
-        padding: "10px 20px",
-        backgroundColor: "#d4a34d",
-        color: "white",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer",
-        fontWeight: "bold",
-      }}
-    >
-      Cerrar Sesión
-    </button>
-  </div>
-);
 
 export default App;

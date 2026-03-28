@@ -124,3 +124,21 @@
         flex-direction: row;
     }
 }
+
+.logoBox {
+    width: 4rem;
+    height: 4rem;
+    background-color: #111827;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.mainLogo {
+    height: 65%;
+    width: 100%;
+    object-fit: contain;
+}

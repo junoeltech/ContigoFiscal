@@ -1,0 +1,619 @@
+/* =========================================================
+   VARIABLES - Estilo "Clean SaaS"
+   ========================================================= */
+.dashboardContainer {
+  /* Al poner las variables aquí, SOLO afectarán a lo que esté 
+     dentro del Dashboard, devolviendo el dorado a tu Home */
+  --bg-canvas: #f3f4f6;
+  --bg-surface: #ffffff;
+  
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  
+  --brand-main: #0f172a; 
+  --brand-accent: #2563eb; 
+  --border-light: #e5e7eb;
+  
+  --status-nuevo-bg: #fee2e2;
+  --status-nuevo-text: #ef4444;
+  --status-proceso-bg: #fef3c7;
+  --status-proceso-text: #f59e0b;
+  --status-final-bg: #d1fae5;
+  --status-final-text: #10b981;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Estilos base del contenedor */
+  padding: 2rem;
+  background-color: var(--bg-canvas);
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+/* =========================================================
+   HEADER
+   ========================================================= */
+.dashHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.headerInfo h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--brand-main);
+  margin: 0 0 0.25rem 0;
+}
+
+.headerInfo p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.logoutBtn {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.logoutBtn:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* =========================================================
+   SECCIÓN DE FILTROS
+   ========================================================= */
+.filtersSection {
+  background: var(--bg-surface);
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  align-items: flex-end;
+}
+
+.dateRangeGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.inputGroup label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filterInput {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  background-color: #f9fafb;
+}
+
+.filterInput:focus {
+  outline: none;
+  background-color: var(--bg-surface);
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); /* Anillo de enfoque azul sutil */
+}
+
+.clearBtn {
+  padding: 0.6rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.clearBtn:hover {
+  background: #f3f4f6;
+  color: var(--text-primary);
+}
+
+/* =========================================================
+   NAVEGACIÓN POR PESTAÑAS (TABS)
+   ========================================================= */
+.tabsNav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0px;
+}
+
+.tabItem {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent; /* Para la animación de la línea */
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: -1px; /* Superpone el borde inferior */
+}
+
+.tabItem:hover {
+  color: var(--text-primary);
+}
+
+.activeTab {
+  color: var(--brand-accent);
+  border-bottom: 2px solid var(--brand-accent);
+}
+
+.activeTab .tabCount {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--brand-accent);
+}
+
+.tabCount {
+  font-size: 0.7rem;
+  background: #f3f4f6;
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: 9999px; /* Forma de píldora perfecta */
+  font-weight: 700;
+}
+
+.tabIcon {
+  font-size: 1rem;
+}
+
+/* =========================================================
+   TABLA DE RESULTADOS
+   ========================================================= */
+.tableWrapper {
+  background: var(--bg-surface);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+.leadsTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.leadsTable th {
+  background: #f9fafb;
+  color: var(--text-secondary);
+  padding: 1rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.leadsTable td {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.leadsTable tr:last-child td {
+  border-bottom: none;
+}
+
+.leadsTable tr {
+  transition: background-color 0.2s ease;
+}
+
+.leadsTable tr:hover {
+  background-color: #f8fafc;
+}
+
+.clientName {
+  font-weight: 600;
+  color: var(--brand-main);
+}
+
+.serviceTag {
+  background: #f3f4f6;
+  color: var(--text-secondary);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid #e5e7eb;
+}
+
+/* Indicadores de Estado (Puntos Mejorados) */
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 0 auto;
+}
+
+.statusDot:hover {
+  transform: scale(1.4);
+}
+
+.dot_nuevo {
+  background: var(--status-nuevo-text);
+  box-shadow: 0 0 0 3px var(--status-nuevo-bg);
+}
+
+.dot_enproceso {
+  background: var(--status-proceso-text);
+  box-shadow: 0 0 0 3px var(--status-proceso-bg);
+}
+
+.dot_finalizado {
+  background: var(--status-final-text);
+  box-shadow: 0 0 0 3px var(--status-final-bg);
+}
+
+/* Botón "Detalles" en la tabla */
+.actionBtn {
+  background: white;
+  color: var(--brand-main);
+  border: 1px solid var(--border-light);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.actionBtn:hover {
+  border-color: #d1d5db;
+  background: #f9fafb;
+}
+
+/* =========================================================
+   MODAL DE DETALLES
+   ========================================================= */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4); /* Slate oscuro con transparencia */
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modalDetail {
+  background: var(--bg-surface);
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow-modal);
+  position: relative;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: none;
+  background: #f3f4f6;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background: #e5e7eb;
+  color: var(--text-primary);
+}
+
+.modalHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--brand-main);
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+/* Píldora de estado en el modal */
+.statusBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Clases dinámicas para statusBadge (Asegúrate que coincidan con tu React) */
+.dot_nuevo { background: var(--status-nuevo-bg); color: var(--status-nuevo-text); }
+.dot_proceso { background: var(--status-proceso-bg); color: var(--status-proceso-text); }
+.dot_finalizado { background: var(--status-final-bg); color: var(--status-final-text); }
+
+.infoSection h4 {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.4rem;
+}
+
+.whatsappBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #10b981; /* Verde esmeralda más sofisticado que el verde Whatsapp crudo */
+  color: white;
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+
+.whatsappBtn:hover {
+  background: #059669;
+}
+
+.adminNotes {
+  width: 100%;
+  height: 100px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: #f9fafb;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.adminNotes:focus {
+  outline: none;
+  border-color: var(--brand-accent);
+  background: var(--bg-surface);
+}
+
+.modalFooterBtns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+.saveNotesBtn {
+  background: var(--brand-main);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.saveNotesBtn:hover {
+  background: #1e293b;
+}
+
+.deleteBtn {
+  background: white;
+  color: #ef4444;
+  border: 1px solid #fee2e2;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+  background: #fee2e2;
+}
+
+/* =========================================================
+   TOAST NOTIFICATIONS
+   ========================================================= */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-surface);
+  border-radius: 12px;
+  z-index: 3000;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  animation: slideInBottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.success .toastIcon { color: var(--status-final-text); }
+.error .toastIcon { color: var(--status-nuevo-text); }
+
+/* =========================================================
+   ANIMACIONES Y UTILIDADES
+   ========================================================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes slideInBottom {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.rowFadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.emptyState {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+  background: transparent;
+}
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+@media (max-width: 768px) {
+  .dashboardContainer { padding: 1rem; }
+  .filtersSection { flex-direction: column; align-items: stretch; }
+  .inputGroup { min-width: 100%; }
+  .tableWrapper { overflow-x: auto; }
+  .leadsTable { min-width: 800px; }
+  .modalFooterBtns { grid-template-columns: 1fr; }
+  .toast {
+    bottom: 1rem; right: 1rem; left: 1rem; width: auto; justify-content: center;
+  }
+}
+
+/* --- ESTILOS ESPECÍFICOS DEL NUEVO MODAL --- */
+.modalMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.modalDate {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  background: #f9fafb;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+}
+
+.contactItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.contactLabel {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.contactValue {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.contactValue:hover {
+  color: var(--brand-accent);
+}
+
+.messageBox {
+  background: #f8fafc;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--brand-accent);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.actionGroup {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.actionGroup button {
+  flex: 1; /* Hace que los botones de Guardar y Eliminar compartan el ancho 50/50 */
+}

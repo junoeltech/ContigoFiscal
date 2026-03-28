@@ -11,13 +11,6 @@
     /* Centrado vertical para que el texto y las cards se alineen */
 }
 
-@media (min-width: 1024px) {
-    .grid {
-        /* Cambiamos a 2 columnas iguales */
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
 .trustContent {
     display: flex;
     flex-direction: column;
