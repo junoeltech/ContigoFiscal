@@ -14,10 +14,9 @@ export default function HomePage({ isChatOpen, setIsChatOpen, onOpenChat }) {
       <Header onOpenChat={onOpenChat} />
 
       {/* 2. Sección de impacto principal */}
-      <Hero onOpenChat={onOpenChat}/>
+      <Hero onOpenChat={onOpenChat} />
 
       {/* 3. Catálogo de soluciones fiscales */}
-      {/* Usamos un contenedor simple para dar espacio si es necesario */}
       <main>
         <Services />
 
@@ -28,8 +27,10 @@ export default function HomePage({ isChatOpen, setIsChatOpen, onOpenChat }) {
         <Contact />
 
         {/* 6. Chatbot v1 */}
-        <ChatbotWidget isExternalOpen={isChatOpen} 
-        setIsExternalOpen={setIsChatOpen}/>
+        <ChatbotWidget
+          isExternalOpen={isChatOpen}
+          setIsExternalOpen={setIsChatOpen}
+        />
       </main>
 
       {/* 6. Cierre de página y enlaces legales */}

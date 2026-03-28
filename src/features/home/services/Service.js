@@ -62,5 +62,22 @@ class Services {
             throw error.response?.data?.message || "Error al iniciar sesión";
         }
 }
+
+
+getAllRequests() {
+    return this.fetchData(`${endpoints.requests}/consultar`); 
+}
+
+
+updateRequestStatus(id, nuevoStatus) {
+  
+    return axios.patch(`${endpoints.requests}/${id}/status?status=${nuevoStatus}`);
+}
+
+deleteRequest(id) {
+    return axios.delete(`${endpoints.requests}/${id}`);
+}
+
+
 }
 export default new Services();
