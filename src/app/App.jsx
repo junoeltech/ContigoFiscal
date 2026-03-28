@@ -17,6 +17,7 @@ import DashboardAdmin from "../features/home/components/Dashboard"; // <--- Tu n
 function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const toggleChat = () => setIsChatOpen(true);
+  const [toast, setToast] = useState(null); // Estado global para el toast
 
   // Estado del usuario con persistencia en localStorage
   const [user, setUser] = useState(() => {
