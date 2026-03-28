@@ -2,100 +2,105 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  font-family: 'Segoe UI', sans-serif;
   z-index: 1000;
 }
 
+/* BOTÓN */
 .chatbotToggle {
-  background: #2196F3;
-  color: white;
-  border: none;
-  border-radius: 50%;
   width: 60px;
   height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1f6fa8, #2b89c6);
+  color: white;
   font-size: 24px;
+  border: none;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: transform 0.3s, background 0.3s;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
-.chatbotToggle:hover {
-  background: #1976D2;
-  transform: scale(1.1);
-}
-
+/* VENTANA */
 .chatbotWindow {
-  position: absolute;
-  bottom: 80px;
-  right: 0;
-  width: 350px;
+  width: 340px;
   max-height: 500px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  padding: 15px;
+  background: white;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  animation: fadeIn 0.4s ease;
 }
 
+/* HEADER */
+.chatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #3c4a59;
+  color: white;
+  padding: 10px 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  font-weight: bold;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* MENSAJES */
 .chatbotWindow p {
-  margin-bottom: 10px;
-  font-weight: 500;
+  background: #1f6fa8;
+  color: white;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+/* BOTONES */
+.chatbotWindow button {
+  margin: 6px 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* PRIMARIO */
+.primaryBtn {
+  background: #1f6fa8;
+  color: white;
+}
+
+.primaryBtn:hover {
+  background: #155a87;
+}
+
+/* SECUNDARIO */
+.secondaryBtn {
+  background: #f2f2f2;
   color: #333;
 }
 
-.chatbotWindow button {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 20px;
-  margin: 5px 0;
-  cursor: pointer;
-  transition: background 0.3s;
+.secondaryBtn:hover {
+  background: #e0e0e0;
 }
 
-.chatbotWindow button:hover {
-  background: #388E3C;
-}
-
+/* INPUT */
 .chatbotWindow input {
-  width: 100%;
+  width: calc(100% - 20px);
+  margin: 5px 10px;
   padding: 10px;
-  margin: 6px 0;
-  border: 1px solid #ccc;
   border-radius: 8px;
-  outline: none;
-  transition: border 0.3s;
+  border: 1px solid #ccc;
 }
 
-.chatbotWindow input:focus {
-  border: 1px solid #2196F3;
-}
-
+/* LISTA */
 .docList {
   list-style: none;
-  padding: 0;
-}
-
-.docList li {
-  background: #f1f1f1;
-  margin: 5px 0;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-.backBtn {
-  background: #f44336 !important;
-}
-
-.backBtn:hover {
-  background: #d32f2f !important;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  padding: 10px;
 }

@@ -4,34 +4,32 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { useState, useEffect } from "react"; // Añadimos useEffect
+import { useState } from "react";
 import HomePage from "../features/home/pages/HomePage";
 import Privacypolicy from "../features/home/components/Privacypolicy";
 import Terms from "../features/home/components/Terms";
 import Login from "../features/home/components/login";
-import ProtectedRoute from "../features/home/components/ProtectedRouter"; // Asegúrate que el archivo se llame así
+import ProtectedRoute from "../features/home/components/ProtectedRouter";
+import GlobalToast from "../features/home/components/GlobalToast"; // Importamos el toast
 
 function App() {
-
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [toast, setToast] = useState(null); // Estado global para el toast
 
   const toggleChat = () => {
-    setIsChatOpen(true); // O setIsChatOpen(!isChatOpen) para que abra y cierre
+    setIsChatOpen(true);
   };
 
-  // 1. Inicializamos el estado buscando si ya había un usuario en el navegador
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user_session");
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  // 2. Función para manejar el inicio de sesión y GUARDAR en el navegador
   const handleLogin = (userData) => {
     setUser(userData);
     localStorage.setItem("user_session", JSON.stringify(userData));
   };
 
-  // 3. Función para cerrar sesión y LIMPIAR el navegador
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem("user_session");
@@ -41,7 +39,6 @@ function App() {
     <Router>
       <main>
         <Routes>
-          {/* Rutas Públicas */}
           <Route 
             path="/" 
             element={
@@ -49,13 +46,12 @@ function App() {
                 isChatOpen={isChatOpen} 
                 setIsChatOpen={setIsChatOpen} 
                 onOpenChat={toggleChat} 
+                setGlobalToast={setToast} // Pasamos el setter al HomePage
               />
             } 
           />
           <Route path="/Privacypolicy" element={<Privacypolicy />} />
           <Route path="/Terms" element={<Terms />} />
-
-          {/* Ruta de Login: Si ya está logueado, lo manda al dashboard directamente */}
           <Route
             path="/login"
             element={
@@ -66,8 +62,6 @@ function App() {
               )
             }
           />
-
-          {/* Ruta Protegida: Usamos tu componente ProtectedRoute con la alerta */}
           <Route
             path="/dashboard"
             element={
@@ -76,20 +70,24 @@ function App() {
               </ProtectedRoute>
             }
           />
-
-          {/* Redirección por defecto si la ruta no existe */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
+
+      {/* Renderizamos el toast global */}
+      {toast && (
+        <GlobalToast
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </Router>
   );
 }
 
-// Dashboard con botón de Logout real
 const Dashboard = ({ onLogout }) => (
-  <div
-    style={{ padding: "40px", textAlign: "center", fontFamily: "sans-serif" }}
-  >
+  <div style={{ padding: "40px", textAlign: "center", fontFamily: "sans-serif" }}>
     <h1 style={{ color: "#0d2c4f" }}>Bienvenido al Panel de Contigo Fiscal</h1>
     <p>Aquí verás los datos enviados por los clientes.</p>
     <button
