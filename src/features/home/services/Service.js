@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "https://contigofiscal-backend.onrender.com";
+const API_BASE = "https://contigofiscal-backend.onrender.com/api";
 
 // 1. Creamos una instancia personalizada de Axios
 const api = axios.create({
