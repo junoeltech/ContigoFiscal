@@ -3,7 +3,7 @@ import axios from "axios";
 //const BASE_URL = "http://localhost:8082/administracion";
 
 
-const API_BASE = "http://localhost:8081/api";
+const API_BASE = "https://contigofiscal-backend.onrender.com";
 
 const endpoints = {
     requests: `${API_BASE}/requests`,
@@ -50,17 +50,17 @@ class Services {
         return this.postData(`${endpoints.requests}/crear`, data); 
     }
 
-    async login(email, password) {
-        try {
-            // Enviamos las credenciales al endpoint de autenticación
-            const response = await axios.post("http://localhost:8081/api/auth/login", {
+   async login(email, password) {
+    try {
+        // CAMBIO AQUÍ: Usamos la URL de Render, no localhost
+        const response = await axios.post(`${API_BASE}/api/auth/login`, {
             email: email,
             password: password
-            });
-            return response.data; // El backend debería retornar algo como { email: "...", role: "ADMIN" }
-        } catch (error) {
-            throw error.response?.data?.message || "Error al iniciar sesión";
-        }
+        });
+        return response.data;
+    } catch (error) {
+        throw error.response?.data?.message || "Error al iniciar sesión";
+    }
 }
 
 
