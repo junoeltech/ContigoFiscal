@@ -2,43 +2,40 @@ import { useEffect, useState } from "react";
 import styles from "../styles/ChatbotWidget.module.css";
 import Service from "../services/Service";
 
-function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) { 
+function ChatbotWidget({ isExternalOpen, setIsExternalOpen, setGlobalToast }) { 
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState("inicio");
 
   useEffect(() => {
-        if (isExternalOpen) {
-            setIsOpen(true);
-            
-            if (typeof setIsExternalOpen === "function") {
-                setIsExternalOpen(false); 
-            }
-        }
-    }, [isExternalOpen, setIsExternalOpen]);
+    if (isExternalOpen) {
+      setIsOpen(true);
+      if (typeof setIsExternalOpen === "function") {
+        setIsExternalOpen(false); 
+      }
+    }
+  }, [isExternalOpen, setIsExternalOpen]);
 
   const closeChat = () => {
     setIsOpen(false);
-    setIsExternalOpen(false); // Avisamos al padre que ya se cerró
+    setIsExternalOpen(false);
   };
-  
-  // Datos para el backend
+
+  // Datos
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState("");
   const [rfc, setRfc] = useState("");
-  const [tipoUsuario, setTipoUsuario] = useState(""); // "persona_fisica" o "persona_moral"
-  const [servicioId, setServicioId] = useState(""); // UUID del servicio
-  
-  // Catálogos del backend
+  const [tipoUsuario, setTipoUsuario] = useState("");
+  const [servicioId, setServicioId] = useState("");
+
   const [serviciosList, setServiciosList] = useState([]); 
   const [documentosRequeridos, setDocumentosRequeridos] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // 1. Cargar servicios al iniciar
   useEffect(() => {
     const fetchServicios = async () => {
       try {
-        const data = await Service.getServicios(); // GET /api/catalogs/services
+        const data = await Service.getServicios();
         setServiciosList(data);
       } catch (error) {
         console.error("Error cargando servicios", error);
@@ -49,8 +46,12 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) {
 
   const cancelar = () => {
     setStep("inicio");
-    setNombre(""); setCorreo(""); setTelefono(""); setRfc("");
-    setServicioId(""); setDocumentosRequeridos([]);
+    setNombre(""); 
+    setCorreo(""); 
+    setTelefono(""); 
+    setRfc("");
+    setServicioId(""); 
+    setDocumentosRequeridos([]);
     setIsOpen(false);
   };
 
@@ -59,12 +60,11 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) {
     setStep("tramite");
   };
 
-  // 2. Lógica dinámica: Seleccionar trámite y buscar documentos (Sprint 2)
   const handleSelectTramite = async (id) => {
     setServicioId(id);
     setLoading(true);
     try {
-      const docs = await Service.getDocumentosPorServicio(id); // GET /api/catalogs/services/{id}/documents
+      const docs = await Service.getDocumentosPorServicio(id);
       setDocumentosRequeridos(docs);
       setStep("confirmacion");
     } catch (error) {
@@ -74,85 +74,150 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen }) {
     }
   };
 
-  // 3. Enviar registro final al Backend (POST /api/requests)
   const handleFinalizar = async () => {
-    const cliente = {
-      nombreCompleto: nombre,
-      correo: correo,
-      telefono: telefono,
-      rfc: rfc,
-      tipoContribuyente: tipoUsuario,
-      servicioId: servicioId
-    };
-
-    try {
-      console.log("Payload que se va a enviar:", cliente);
-      await Service.saveCliente(cliente); // Llamada a tu API de Spring Boot
-      alert("¡Solicitud recibida! El contador te contactará pronto.");
-      cancelar();
-    } catch (error) {
-      alert("Error al enviar la solicitud.", error);
-    }
+  const cliente = { 
+    nombreCompleto: nombre, 
+    correo, 
+    telefono, 
+    rfc, 
+    tipoContribuyente: tipoUsuario, 
+    servicioId 
   };
 
+  try {
+    await Service.saveCliente(cliente);
+
+    setGlobalToast({ 
+      type: "success", 
+      message: "¡Solicitud recibida! El contador te contactará pronto." 
+    });
+
+    cancelar();
+  } catch (error) {
+    setGlobalToast({ 
+      type: "error", 
+      message: "Error al enviar la solicitud." 
+    });
+  }
+};
   return (
     <div className={styles.chatbotWidget}>
-      <button className={styles.chatbotToggle} onClick={() => setIsOpen(!isOpen)}>💬</button>
+      
+      {/* BOTÓN SOLO CUANDO ESTÁ CERRADO */}
+      {!isOpen && (
+        <button 
+          className={styles.chatbotToggle} 
+          onClick={() => setIsOpen(true)}
+        >
+          💬
+        </button>
+      )}
 
+      {/* CHAT */}
       {isOpen && (
         <div className={styles.chatbotWindow}>
-          {/* PASO 1: PERFIL */}
+
+          {/* HEADER */}
+          <div className={styles.chatHeader}>
+            <span>Asistencia en línea</span>
+            <button onClick={closeChat} className={styles.closeBtn}>✖</button>
+          </div>
+
+          {/* PASO 1 */}
           {step === "inicio" && (
             <>
               <p>Bienvenido. Selecciona tu perfil:</p>
-              <button onClick={() => { setTipoUsuario("persona_fisica"); setStep("datos"); }}>Persona Física</button>
-              <button onClick={() => { setTipoUsuario("persona_moral"); setStep("datos"); }}>Persona Moral</button>
+
+              <button 
+                className={styles.primaryBtn}
+                onClick={() => { 
+                  setTipoUsuario("persona_fisica"); 
+                  setStep("datos"); 
+                }}
+              >
+                Persona Física
+              </button>
+
+              <button 
+                className={styles.primaryBtn}
+                onClick={() => { 
+                  setTipoUsuario("persona_moral"); 
+                  setStep("datos"); 
+                }}
+              >
+                Persona Moral
+              </button>
             </>
           )}
 
-          {/* PASO 2: DATOS PERSONALES */}
+          {/* PASO 2 */}
           {step === "datos" && (
             <form onSubmit={handleSubmitDatos}>
               <p>Déjanos tus datos de contacto:</p>
+
               <input type="text" placeholder="Nombre completo" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
               <input type="email" placeholder="Correo" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
               <input type="tel" placeholder="Teléfono" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
               <input type="text" placeholder="RFC" value={rfc} onChange={(e) => setRfc(e.target.value)} required />
-              <button type="submit">Continuar</button>
+
+              <button type="submit" className={styles.primaryBtn}>
+                Continuar
+              </button>
             </form>
           )}
 
-          {/* PASO 3: SELECCIÓN DE TRÁMITE (Dinámico desde DB) */}
+          {/* PASO 3 */}
           {step === "tramite" && (
             <>
               <p>¿Qué trámite necesitas, {nombre}?</p>
+
               {serviciosList.map(s => (
-                <button key={s.id} onClick={() => handleSelectTramite(s.id)}>
+                <button 
+                  key={s.id} 
+                  className={styles.secondaryBtn}
+                  onClick={() => handleSelectTramite(s.id)}
+                >
                   {s.name}
                 </button>
               ))}
+
+              {loading && <p>Cargando...</p>}
             </>
           )}
 
-          {/* PASO 4: CONFIRMACIÓN Y REQUISITOS (HU2) */}
+          {/* PASO 4 */}
           {step === "confirmacion" && (
             <div>
               <p>Excelente. Para este trámite necesitaremos:</p>
+
               <ul className={styles.docList}>
                 {documentosRequeridos.map(d => (
                   <li key={d.id}>✅ {d.name}</li>
                 ))}
               </ul>
+
               <p>¿Deseas que el contador valide tu información?</p>
-              <button onClick={handleFinalizar}>Sí, enviar solicitud</button>
-              <button onClick={() => setStep("tramite")} className={styles.backBtn}>Volver</button>
+
+              <button 
+                className={styles.primaryBtn}
+                onClick={handleFinalizar}
+              >
+                Sí, enviar solicitud
+              </button>
+
+              <button 
+                className={styles.secondaryBtn}
+                onClick={() => setStep("tramite")}
+              >
+                Volver
+              </button>
             </div>
           )}
+
         </div>
       )}
     </div>
   );
 }
-
 
 export default ChatbotWidget;

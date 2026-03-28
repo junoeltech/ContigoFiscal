@@ -1,0 +1,58 @@
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 280px;
+  max-width: 320px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  animation: slideIn 0.4s ease;
+  z-index: 2000;
+}
+
+/* TIPOS */
+.success {
+  background: linear-gradient(135deg, #1f6fa8, #2b89c6);
+}
+
+.error {
+  background: linear-gradient(135deg, #d9534f, #c9302c);
+}
+
+/* ICONO */
+.icon {
+  font-size: 20px;
+}
+
+/* TEXTO */
+.toast p {
+  flex: 1;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* BOTÓN CERRAR */
+.closeBtn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ANIMACIÓN */
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
