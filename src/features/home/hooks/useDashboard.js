@@ -1,109 +1,114 @@
 import { useState, useEffect } from "react";
+import Services from "../services/Service";
 
 export const useDashboard = () => {
-    // Estado inicial de los Leads (Carga de localStorage o datos de prueba)
-    const [leads, setLeads] = useState(() => {
-        const saved = localStorage.getItem("contigo_fiscal_leads");
-        return saved ? JSON.parse(saved) : [
-            { id: 1, nombre: "Juan Pérez", servicio: "Declaración de impuestos", fecha: "2026-03-26", estatus: "nuevo", email: "juan@mail.com", telefono: "525512345678", mensaje: "Hola, necesito ayuda con mi declaración anual, soy RESICO.", notas: "" },
-            { id: 2, nombre: "María García", servicio: "Regularización Fiscal", fecha: "2026-03-20", estatus: "proceso", email: "maria@mail.com", telefono: "525587654321", mensaje: "Tengo dudas con el buzón tributario.", notas: "" }
-        ];
-    });
+  const [leads, setLeads] = useState([]);
+  const [notification, setNotification] = useState(null);
 
-    const [filterService, setFilterService] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [selectedLead, setSelectedLead] = useState(null);
-    const [tempNote, setTempNote] = useState("");
 
-    // Estado para las notificaciones 
-    const [notification, setNotification] = useState(null);
+  const [filterService, setFilterService] = useState(""); 
+  const [startDate, setStartDate] = useState("");         
+  const [endDate, setEndDate] = useState("");
+  const [selectedLead, setSelectedLead] = useState(null);
+  const [tempNote, setTempNote] = useState("");
 
-    // Auto-guardado en LocalStorage
-    useEffect(() => {
-        localStorage.setItem("contigo_fiscal_leads", JSON.stringify(leads));
-    }, [leads]);
+  useEffect(() => {
+    loadLeads();
+  }, []);
 
-    // Temporizador para que la notificación desaparezca sola
-    useEffect(() => {
-        if (notification) {
-            const timer = setTimeout(() => setNotification(null), 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [notification]);
+  const loadLeads = async () => {
+    try {
+      const data = await Services.getAllRequests();
+      setLeads(data);
+    } catch (error) {
+      showNotification("error", "Error al conectar con el servidor");
+    }
+  };
 
-    // MAPA DE FORMATEO PARA ESTADOS
-    const statusConfig = {
-        nuevo: { label: "Nuevo", type: "nuevo" },
-        proceso: { label: "En Proceso", type: "proceso" },
-        finalizado: { label: "Finalizado", type: "finalizado" }
+  const handleOpenDetails = (lead) => {
+    setSelectedLead(lead);
+    setTempNote(lead.notas || ""); 
+  };
+
+ 
+
+  const handleDeleteLead = async (id) => {
+    if (window.confirm("¿Estás seguro de que deseas eliminar este prospecto?")) {
+      try {
+        await Services.deleteRequest(id);
+        
+
+        setLeads(prev => prev.filter(lead => lead.id !== id));
+        showNotification("error", "Prospecto eliminado"); 
+        
+        if (selectedLead?.id === id) setSelectedLead(null); 
+      } catch (error) {
+        showNotification("error", "Error al eliminar el registro");
+      }
+    }
+  };
+
+ const toggleStatus = async (id) => {
+    const currentLead = leads.find(l => l.id === id);
+    if (!currentLead) return;
+
+    const statusFlow = {
+        "nuevo": "proceso",
+        "proceso": "finalizado",
+        "finalizado": "nuevo"
     };
+    
+    const nextStatus = statusFlow[currentLead.status.toLowerCase()] || "nuevo";
 
-    const handleOpenDetails = (lead) => {
-        setSelectedLead(lead);
-        setTempNote(lead.notas || "");
-    };
+    try {
+        await Services.updateRequestStatus(id, nextStatus);
 
-    // --- LÓGICA CORREGIDA DE ACTUALIZACIÓN DE ESTADO ---
-    const toggleStatus = (id) => {
-        // 1. Buscamos el prospecto exacto al que le dimos clic ANTES de hacer cambios
-        const leadTarget = leads.find((l) => l.id === id);
-        if (!leadTarget) return;
+        showNotification("success", `Estado actualizado a: ${nextStatus.toUpperCase()}`);
 
-        // 2. Calculamos cuál será el siguiente estado de forma inmediata (Síncrona)
-        const nextStatus = leadTarget.estatus === "nuevo" ? "proceso" :
-            leadTarget.estatus === "proceso" ? "finalizado" : "nuevo";
+        loadLeads();
+    } catch (error) {
+        console.error("Error al actualizar status:", error);
+        showNotification("error", "No se pudo actualizar el estado");
+    }
+};
 
-        // 3. Actualizamos la tabla de leads con el nuevo estado ya calculado
-        setLeads((prev) =>
-            prev.map((l) => (l.id === id ? { ...l, estatus: nextStatus } : l))
-        );
+  const filteredLeads = leads.filter((lead) => {
+    const matchesService = (lead.servicio || "").toLowerCase().includes(filterService.toLowerCase());
+    const matchesDate = true; 
 
-        // 4. Disparamos la notificación usando el estado que calculamos
-        const config = statusConfig[nextStatus];
+    return matchesService && matchesDate;
+  });
 
-        setNotification({
-            message: `Estatus cambiado a: ${config.label}`,
-            type: config.type,
-            id: Date.now()
-        });
-    };
+  const clearFilters = () => {
+    setFilterService("");
+    setStartDate("");
+    setEndDate("");
+  };
 
-    const handleSaveNotes = () => {
-        setLeads(prev => prev.map(l => (l.id === selectedLead.id ? { ...l, notas: tempNote } : l)));
-        setSelectedLead(null);
-        setNotification({ message: "¡Notas guardadas correctamente!", type: "success", id: Date.now() });
-    };
+  const showNotification = (type, message) => {
+    setNotification({ id: Date.now(), type, message });
+    setTimeout(() => setNotification(null), 3000);
+  };
 
-    const handleDeleteLead = (id) => {
-        if (window.confirm("¿Seguro que deseas eliminar esta solicitud?")) {
-            setLeads(prev => prev.filter(l => l.id !== id));
-            setSelectedLead(null);
-            setNotification({ message: "Solicitud eliminada", type: "error", id: Date.now() });
-        }
-    };
 
-    const clearFilters = () => {
-        setFilterService("");
-        setStartDate("");
-        setEndDate("");
-    };
-
-    const filteredLeads = leads.filter(lead => {
-        const matchesService = lead.servicio.toLowerCase().includes(filterService.toLowerCase());
-        const matchesStart = startDate === "" || lead.fecha >= startDate;
-        const matchesEnd = endDate === "" || lead.fecha <= endDate;
-        return matchesService && matchesStart && matchesEnd;
-    });
-
-    return {
-        filterService, setFilterService,
-        startDate, setStartDate,
-        endDate, setEndDate,
-        selectedLead, setSelectedLead,
-        tempNote, setTempNote,
-        notification,
-        filteredLeads,
-        handleOpenDetails, toggleStatus, handleSaveNotes, handleDeleteLead, clearFilters
-    };
+  return {
+    filterService,
+    setFilterService,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    selectedLead,
+    setSelectedLead,
+    tempNote,
+    setTempNote,
+    notification,
+    handleOpenDetails, 
+    toggleStatus,
+    filteredLeads, 
+    clearFilters,
+    loadLeads,
+    handleDeleteLead,
+    
+  };
 };

@@ -59,7 +59,7 @@ export default function Contact() {
                     Escríbenos
                   </p>
                   <p className="text-sm font-medium">
-                    contacto@contigofiscal.com
+                    contigofiscal@hotmail.com
                   </p>
                 </div>
               </div>
@@ -79,14 +79,14 @@ export default function Contact() {
                   <p className="text-xs text-gray-400 font-bold uppercase">
                     Llámanos
                   </p>
-                  <p className="text-sm font-medium">+52 55 1234 5678</p>
+                  <p className="text-sm font-medium">+52 247 121 2578</p>
                 </div>
               </div>
             </div>
 
             <div className="mt-10">
               <a
-                href="https://wa.me/525512345678"
+                href="https://wa.me/522471212578"
                 className={styles.whatsappBtn}
               >
                 Chat vía WhatsApp

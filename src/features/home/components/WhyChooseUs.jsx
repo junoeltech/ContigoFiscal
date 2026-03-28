@@ -26,8 +26,13 @@ export default function WhyChooseUs({ onOpenChat }) {
       title: "Diagnóstico Inicial",
       desc: "Analizamos tu situación actual sin costo.",
     },
-    {
+     {
       step: "02",
+      title: "Recolección de Documentos",
+      desc: "Recopilamos tu información fiscal",
+    },
+    {
+      step: "03",
       title: "Ejecución Experta",
       desc: "Nosotros nos encargamos de toda la contabilidad.",
     },

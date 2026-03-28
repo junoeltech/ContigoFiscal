@@ -60,6 +60,9 @@ export default function Services() {
           <p className={styles.cardText}>
             Determinación, cálculo y presentación de obligaciones ante el SAT.
           </p>
+          <button className={styles.cardAction} onClick={() => setSelectedService(SERVICES_DATA.declaraciones)}>
+            Ver más →
+          </button>
         </article>
 
         {/* Tarjeta 2: Asesoría */}
@@ -99,6 +102,9 @@ export default function Services() {
           <p className={styles.cardText}>
             Estrategias diseñadas para optimizar tu carga fiscal legalmente.
           </p>
+          <button className={styles.cardAction} onClick={() => setSelectedService(SERVICES_DATA.asesoria)}>
+            Ver más →
+          </button>
         </article>
 
         {/* Tarjeta 3: Trámites */}
@@ -141,6 +147,9 @@ export default function Services() {
           <p className={styles.cardText}>
             Gestión de e.firma, RFC y requerimientos sin complicaciones.
           </p>
+          <button className={styles.cardAction} onClick={() => setSelectedService(SERVICES_DATA.tramites)}>
+            Ver más →
+          </button>
         </article>
 
         {/* Tarjeta 4: Contabilidad */}
@@ -176,6 +185,9 @@ export default function Services() {
           <p className={styles.cardText}>
             Control y administración financiera para orden permanente.
           </p>
+          <button className={styles.cardAction} onClick={() => setSelectedService(SERVICES_DATA.contabilidad)}>
+            Ver más →
+          </button>
         </article>
 
         {/* Tarjeta 5: Regularización */}
@@ -215,6 +227,9 @@ export default function Services() {
           <p className={styles.cardText}>
             Corrección de atrasos y omisiones de forma estratégica.
           </p>
+          <button className={styles.cardAction} onClick={() => setSelectedService(SERVICES_DATA.regularizacion)}>
+            Ver más →
+          </button>
         </article>
       </div>
 

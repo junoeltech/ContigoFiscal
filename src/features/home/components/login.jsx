@@ -1,24 +1,44 @@
 import React, { useState } from "react";
 import styles from "../styles/login.module.css";
 import LogoImg from "../../../assets/contigofiscal_logo.png";
+import Service from "../services/Service";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(false); // Estado para la animación de error
+  const [error, setError] = useState(false);  
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email === "admin@contigofiscal.com" && pass === "123456") {
-      onLogin({ email, role: "admin" });
-    } else {
+    setLoading(true);
+    setError(false); // Reiniciamos el estado de error en cada intento
+
+    try {
+      // Enviamos email y pass tal cual los recibe tu LoginRequestDTO
+      const userData = await Service.login(email, pass);
+      
+      // Si llegamos aquí, el backend devolvió 200 OK
+      onLogin(userData); 
+      
+    } catch (err) {
+      // Activamos la animación de "shake" (sacudida)
       setError(true);
-      setTimeout(() => setError(false), 500); // Quitamos el error después de la animación
-      alert("Acceso denegado: Credenciales no válidas");
+      
+      // Intentamos extraer el mensaje de error del backend (Map.of("message", ...))
+      const errorMessage = err.response?.data?.message || "Credenciales incorrectas";
+      
+      console.error("Login Error:", errorMessage);
+      // Opcional: puedes usar un toast o un pequeño texto en el form en lugar de alert
+      alert(errorMessage); 
+      
+      // Quitamos el efecto shake después de 500ms para que se pueda repetir
+      setTimeout(() => setError(false), 500);
+    } finally {
+      setLoading(false);
     }
   };
-
   return (
     <div className={styles.loginPage}>
       {/* Fondo decorativo moderno */}
@@ -39,7 +59,7 @@ const Login = ({ onLogin }) => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="tu correo electronico"
+              placeholder="Tu correo electronico"
               required
             />
           </div>
@@ -51,7 +71,7 @@ const Login = ({ onLogin }) => {
                 type={showPassword ? "text" : "password"}
                 value={pass}
                 onChange={(e) => setPass(e.target.value)}
-                placeholder="contraseña"
+                placeholder="Contraseña"
                 required
               />
               <button
