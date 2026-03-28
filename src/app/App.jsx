@@ -47,6 +47,7 @@ function App() {
                 isChatOpen={isChatOpen}
                 setIsChatOpen={setIsChatOpen}
                 onOpenChat={toggleChat}
+                setGlobalToast={setToast}
               />
             }
           />
