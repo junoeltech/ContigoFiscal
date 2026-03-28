@@ -13,7 +13,7 @@ const Login = ({ onLogin }) => {
    const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(false); // Reiniciamos el estado de error en cada intento
+    setError(""); // Reiniciamos el estado de error en cada intento
 
     try {
       // Enviamos email y pass tal cual los recibe tu LoginRequestDTO
@@ -25,6 +25,7 @@ const Login = ({ onLogin }) => {
     } catch (err) {
       // Activamos la animación de "shake" (sacudida)
       setError(true);
+      setLoading(false);
       
       // Intentamos extraer el mensaje de error del backend (Map.of("message", ...))
       const errorMessage = err.response?.data?.message || "Credenciales incorrectas";
@@ -114,9 +115,14 @@ const Login = ({ onLogin }) => {
             </div>
           </div>
 
-          <button className={styles.submitBtn} type="submit">
-            Ingresar ahora
+          <button
+          className={styles.submitBtn} 
+          type="submit"
+          disabled={loading}
+          >
+            {loading ? "Verificando datos..." : "Iniciar Sesión"}
           </button>
+          {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
         </form>
 
         <footer className={styles.cardFooter}>

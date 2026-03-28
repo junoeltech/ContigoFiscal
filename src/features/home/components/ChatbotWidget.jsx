@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import styles from "../styles/ChatbotWidget.module.css";
 import Service from "../services/Service";
 
-function ChatbotWidget({ isExternalOpen, setIsExternalOpen, setGlobalToast }) { 
+function ChatbotWidget({ isChatOpen, setIsChatOpen, setGlobalToast }) { 
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState("inicio");
 
   useEffect(() => {
-    if (isExternalOpen) {
+    if (isChatOpen) {
       setIsOpen(true);
-      if (typeof setIsExternalOpen === "function") {
-        setIsExternalOpen(false); 
+      if (typeof setIsChatOpen === "function") {
+        setIsChatOpen(false); 
       }
     }
-  }, [isExternalOpen, setIsExternalOpen]);
+  }, [isChatOpen, setIsChatOpen]);
 
   const closeChat = () => {
     setIsOpen(false);
-    setIsExternalOpen(false);
+    setIsChatOpen(false);
   };
 
   // Datos
@@ -107,7 +107,7 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen, setGlobalToast }) {
       {!isOpen && (
         <button 
           className={styles.chatbotToggle} 
-          onClick={() => setIsOpen(true)}
+          onClick={() => setIsOpen(!isOpen)}
         >
           💬
         </button>

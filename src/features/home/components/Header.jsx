@@ -56,7 +56,7 @@ export default function Header({ onOpenChat }) {
         <div className={styles.mobileActions}>
           <button
             className={styles.mobileMenuBtn}
-            onClick={toggleMenu}
+            onClick={onOpenChat}
             aria-label="Abrir menú"
           >
             <svg

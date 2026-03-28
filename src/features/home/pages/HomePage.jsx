@@ -32,7 +32,7 @@ export default function HomePage({ isChatOpen, setIsChatOpen, onOpenChat }) {
       {/* 3. Catálogo de soluciones fiscales */}
 
       <main>
-        <Services />
+        <Services onOpenChat={onOpenChat}/>
         <WhyChooseUs onOpenChat={onOpenChat} />
         <Contact />
 

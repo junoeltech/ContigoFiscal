@@ -48,7 +48,7 @@ class Services {
     // --- AUTENTICACIÓN ---
     async login(email, password) {
         try {
-            const response = await api.post(`/api/auth/login`, { email, password });
+            const response = await api.post(`/auth/login`, { email, password });
             
             // SI TU BACKEND DEVUELVE UN TOKEN (ej: response.data.token)
             // Guardamos la llave en el navegador
