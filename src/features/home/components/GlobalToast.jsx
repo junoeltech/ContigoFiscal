@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import styles from "../styles/GlobalToast.module.css";
 
 function GlobalToast({ type = "success", message, onClose }) {
-  // Auto-cierre en 5 segundos
+
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
     }, 5000);
+
     return () => clearTimeout(timer);
   }, [onClose]);
 
@@ -16,7 +17,12 @@ function GlobalToast({ type = "success", message, onClose }) {
         {type === "success" ? "✅" : "⚠️"}
       </span>
       <p>{message}</p>
-      <button className={styles.closeBtn} onClick={onClose}>✖</button>
+      <button 
+        className={styles.closeBtn} 
+        onClick={onClose}
+      >
+        ✖
+      </button>
     </div>
   );
 }

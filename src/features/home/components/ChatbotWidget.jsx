@@ -75,32 +75,31 @@ function ChatbotWidget({ isExternalOpen, setIsExternalOpen, setGlobalToast }) {
   };
 
   const handleFinalizar = async () => {
-    const cliente = { 
-      nombreCompleto: nombre, 
-      correo, 
-      telefono, 
-      rfc, 
-      tipoContribuyente: tipoUsuario, 
-      servicioId 
-    };
-
-    try {
-      await Service.saveCliente(cliente);
-
-      setGlobalToast({ 
-        type: "success", 
-        message: "¡Solicitud recibida! El contador te contactará pronto." 
-      });
-
-      cancelar();
-    } catch (error) {
-      setGlobalToast({ 
-        type: "error", 
-        message: "Error al enviar la solicitud." 
-      });
-    }
+  const cliente = { 
+    nombreCompleto: nombre, 
+    correo, 
+    telefono, 
+    rfc, 
+    tipoContribuyente: tipoUsuario, 
+    servicioId 
   };
 
+  try {
+    await Service.saveCliente(cliente);
+
+    setGlobalToast({ 
+      type: "success", 
+      message: "¡Solicitud recibida! El contador te contactará pronto." 
+    });
+
+    cancelar();
+  } catch (error) {
+    setGlobalToast({ 
+      type: "error", 
+      message: "Error al enviar la solicitud." 
+    });
+  }
+};
   return (
     <div className={styles.chatbotWidget}>
       

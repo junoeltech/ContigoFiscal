@@ -7,32 +7,37 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import ChatbotWidget from "../components/ChatbotWidget";
 
-export default function HomePage({ isChatOpen, setIsChatOpen, onOpenChat }) {
+export default function HomePage({ 
+  isChatOpen, 
+  setIsChatOpen, 
+  onOpenChat,
+  setGlobalToast // ✅ RECIBIMOS LA PROP
+}) {
   return (
     <>
       {/* 1. Navegación superior */}
       <Header onOpenChat={onOpenChat} />
 
-      {/* 2. Sección de impacto principal */}
+      {/* 2. Sección principal */}
       <Hero onOpenChat={onOpenChat}/>
 
-      {/* 3. Catálogo de soluciones fiscales */}
-      {/* Usamos un contenedor simple para dar espacio si es necesario */}
       <main>
         <Services />
 
-        {/* 4. Sección de valor agregado y proceso */}
+        {/* 4. Sección de valor */}
         <WhyChooseUs onOpenChat={onOpenChat} />
 
-        {/* 5. Formulario de conversión y contacto directo */}
+        {/* 5. Contacto */}
         <Contact />
 
-        {/* 6. Chatbot v1 */}
-        <ChatbotWidget isExternalOpen={isChatOpen} 
-        setIsExternalOpen={setIsChatOpen}/>
+        {/* 6. CHATBOT */}
+        <ChatbotWidget 
+          isExternalOpen={isChatOpen} 
+          setIsExternalOpen={setIsChatOpen}
+          setGlobalToast={setGlobalToast} // ✅ AQUÍ ESTÁ LA CLAVE
+        />
       </main>
 
-      {/* 6. Cierre de página y enlaces legales */}
       <Footer />
     </>
   );

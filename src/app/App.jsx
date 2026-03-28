@@ -10,11 +10,11 @@ import Privacypolicy from "../features/home/components/Privacypolicy";
 import Terms from "../features/home/components/Terms";
 import Login from "../features/home/components/login";
 import ProtectedRoute from "../features/home/components/ProtectedRouter";
-import GlobalToast from "../features/home/components/GlobalToast"; // Importamos el toast
+import GlobalToast from "../features/home/components/GlobalToast";
 
 function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [toast, setToast] = useState(null); // Estado global para el toast
+  const [toast, setToast] = useState(null);
 
   const toggleChat = () => {
     setIsChatOpen(true);
@@ -39,6 +39,8 @@ function App() {
     <Router>
       <main>
         <Routes>
+
+          {/* HOME */}
           <Route 
             path="/" 
             element={
@@ -46,12 +48,15 @@ function App() {
                 isChatOpen={isChatOpen} 
                 setIsChatOpen={setIsChatOpen} 
                 onOpenChat={toggleChat} 
-                setGlobalToast={setToast} // Pasamos el setter al HomePage
+                setGlobalToast={setToast} // ✅ AQUÍ SE PASA
               />
             } 
           />
+
           <Route path="/Privacypolicy" element={<Privacypolicy />} />
           <Route path="/Terms" element={<Terms />} />
+
+          {/* LOGIN */}
           <Route
             path="/login"
             element={
@@ -62,6 +67,8 @@ function App() {
               )
             }
           />
+
+          {/* DASHBOARD */}
           <Route
             path="/dashboard"
             element={
@@ -70,11 +77,12 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
 
-      {/* Renderizamos el toast global */}
+      {/* ✅ TOAST GLOBAL */}
       {toast && (
         <GlobalToast
           type={toast.type}
@@ -86,10 +94,12 @@ function App() {
   );
 }
 
+/* DASHBOARD */
 const Dashboard = ({ onLogout }) => (
   <div style={{ padding: "40px", textAlign: "center", fontFamily: "sans-serif" }}>
     <h1 style={{ color: "#0d2c4f" }}>Bienvenido al Panel de Contigo Fiscal</h1>
     <p>Aquí verás los datos enviados por los clientes.</p>
+
     <button
       onClick={onLogout}
       style={{
